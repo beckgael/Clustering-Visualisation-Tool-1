@@ -1,0 +1,34 @@
+.node {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+.link {
+  stroke: #999;
+  stroke-opacity: .6;
+}
+
+option.opt0 {
+
+	color:#ffffff;
+	background-color:#79bbff;
+	font-weight: bold;
+
+
+}
+
+svg.forceLayout {
+	height: 95%;
+	width: 95%;
+
+}
+
+div.selectAttForce {
+	height: 95%;
+	width: 95%;
+}
+
+
+.node.fixed {
+	fill-opacity:0.65;
+}

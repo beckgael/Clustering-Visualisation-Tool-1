@@ -1,0 +1,331 @@
+div.affi1 {
+	
+	border: 3px solid blue;
+	margin: 3px;
+	background: lightgray;
+}
+
+div.cellsArea {
+
+	height: 98%;
+	width: 98%;
+
+	margin-top: 10px;
+	margin-right: auto;
+	margin-left: auto;
+
+	overflow: auto;
+
+}
+
+
+div.cellsArea2 {
+
+	height: 98%;
+	width: 98%;
+
+	margin-right: auto;
+	margin-left: auto;
+
+}
+
+
+.mapAtt {
+
+		float:left;
+		border:2px solid lightsteelblue;
+		padding: 5px;
+		position: relative;
+		margin: 1px;
+}
+
+svg.svgCell {
+	width: 100%;
+}
+
+
+rect.cellRect {
+
+
+	stroke:black;
+	stroke-width:0;
+	stroke-opacity:0.3;
+}
+
+rect.cellRect:hover {
+
+	fill:black;
+	stroke:black;
+	stroke-width:0;
+	stroke-opacity:0.3;
+}
+
+rect.cellRect2 {
+
+	fill:white;
+	fill-opacity:0;
+	stroke:black;
+	stroke-width:1;
+	stroke-opacity:0.3;
+}
+
+rect.cellRect2:hover {
+
+	fill-opacity:1;
+	fill:black;
+	stroke:black;
+	stroke-width:1;
+	stroke-opacity:0.3;
+}
+
+
+
+
+
+svg {
+
+	font-size: 30px;
+}
+
+svg.barchart {
+height: 250%;
+width:  100%;
+
+}
+
+div.barGraph {
+	height: 48%;
+	width: 98%;
+	overflow: auto;
+
+	border-style: solid;
+	border-width: 2px;
+	border-color: lightsteelblue;
+}
+
+
+div.barGraphbis {
+
+	height: 98%;
+	width: 98%;
+	overflow: auto;
+
+	border-style: solid;
+	border-width: 2px;
+	border-color: lightsteelblue;
+}
+
+div.info1 {
+
+	height: 48%;
+	width: 98%;
+	overflow: auto;
+
+	border-style: solid;
+	border-width: 2px;
+	border-color: lightsteelblue;
+
+	margin-bottom: 10px;
+}
+
+div.info1bis {
+
+	height: 98%;
+	width: 98%;
+}
+
+div.attName {
+	text-align: center;
+	font-size: 20px;
+	font-variant: small-caps;
+	font-weight: bold;
+
+}
+
+
+div.mov1 {
+
+	height: 95%;
+	width: 97%;
+	border: 1px solid blue;
+	margin: 2px;
+}
+
+div.cellZ {
+
+
+}
+
+div.aa {
+	position: relative;
+	margin: 1px;
+	display: inline-block;
+}
+
+div.aa:hover{
+
+	opacity: 0.3;
+	background: red;
+
+}
+
+div.legendSocle{
+	height: 95%;
+	width:110%;
+}
+
+
+button.buttonsAtt {
+	height: 40px;
+	width: 100px;
+	margin: 1px;
+}
+
+div.buttonsAttdiv {
+	height: 95%;
+	width: 97%;
+	margin: 2px;
+}
+
+
+
+div.choiceAtt {
+
+	height: 85%;
+	width: 95%;
+
+	overflow-y:auto;
+
+	border: 1px solid blue;
+}
+
+
+div.divChoixDeroulantAtt {
+   
+   height: 40%;
+   width: 98%;
+   
+	-moz-box-shadow:inset 0px 1px 0px 0px #cae3fc;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #cae3fc;
+	box-shadow:inset 0px 1px 0px 0px #cae3fc;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #4197ee) );
+	background:-moz-linear-gradient( center top, #79bbff 5%, #4197ee 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#79bbff', endColorstr='#4197ee');
+	background-color:#79bbff;
+	-webkit-border-top-left-radius:20px;
+	-moz-border-radius-topleft:20px;
+	border-top-left-radius:20px;
+	-webkit-border-top-right-radius:20px;
+	-moz-border-radius-topright:20px;
+	border-top-right-radius:20px;
+	-webkit-border-bottom-right-radius:20px;
+	-moz-border-radius-bottomright:20px;
+	border-bottom-right-radius:20px;
+	-webkit-border-bottom-left-radius:20px;
+	-moz-border-radius-bottomleft:20px;
+	border-bottom-left-radius:20px;
+	text-indent:0;
+	border:1px solid #469df5;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	line-height:30px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #287ace;
+
+ }
+
+div.divChoixDeroulantAtt select {
+
+	height: 100%;
+	width: 100%;
+	
+	padding: 5px;
+	color:#ffffff;
+	background: transparent;
+	-webkit-appearance: none;
+
+}
+
+
+option.attButtons {
+
+	color:#ffffff;
+	background-color:#79bbff;
+
+
+}
+
+button#ValidChoice {
+
+
+	width: 80%;
+	height: 40px;
+
+	margin-left: 30px;
+
+	-moz-box-shadow:inset 0px 1px 0px 0px #cae3fc;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #cae3fc;
+	box-shadow:inset 0px 1px 0px 0px #cae3fc;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #4197ee) );
+	background:-moz-linear-gradient( center top, #79bbff 5%, #4197ee 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#79bbff', endColorstr='#4197ee');
+	background-color:#79bbff;
+
+	-webkit-border-top-left-radius:20px;
+	-moz-border-radius-topleft:20px;
+	border-top-left-radius:20px;
+	-webkit-border-top-right-radius:20px;
+	-moz-border-radius-topright:20px;
+	border-top-right-radius:20px;
+	-webkit-border-bottom-right-radius:20px;
+	-moz-border-radius-bottomright:20px;
+	border-bottom-right-radius:20px;
+	-webkit-border-bottom-left-radius:20px;
+	-moz-border-radius-bottomleft:20px;
+	border-bottom-left-radius:20px;
+
+	text-indent:0;
+	border:1px solid #469df5;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	line-height:30px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #287ace;
+
+}
+
+div.modifArea {
+
+	height: 60%;
+	width: 95%;
+
+	margin-left: auto;
+	margin-right: auto;
+
+}
+
+
+input#dimYCells {
+
+	width: 95%;
+	height: 30px;
+	margin-left: 10px;
+
+}
+
+input#cellsSize {
+
+	width: 95%;
+	height: 30px;
+	margin-left: 10px;
+}

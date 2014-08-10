@@ -1,0 +1,27 @@
+*****************************************************
+*						Manuel						*
+*****************************************************
+
+Welcome to this manuel which i hope it will help you to correctly use this visualisation tool.
+
+
+FirstPage
+*********
+
+
+
+
+
+Cells
+*****
+
+
+CellsHisto
+**********
+
+Maps
+****
+
+
+MatriceAdjacence
+****************

@@ -1,0 +1,395 @@
+
+div.generalSocle {
+	height: 800px;
+	width: 1600px;
+	
+	max-height: 900px;
+	max-width: 1650px;
+	
+	background: lightgray;
+
+	float: left;
+
+	border-style: solid;
+	border-width: 5px;
+	border-color: lightsteelblue;
+
+	padding: 5px;
+
+}
+
+div.socleDessein {
+
+	height: 95%;
+	width: 70%;
+	
+	max-height: 900px;
+	max-width: 1650px;
+	
+	background: darkgray;
+
+	float: left;
+
+	border-style: solid;
+	border-width: 5px;
+	border-color: lightsteelblue;
+
+	padding: 5px;
+
+}
+
+div.legendG2socle {
+
+	height: 95%;
+	width: 28%;
+
+	float: left;
+
+	background: white;
+
+	border-style: solid;
+	border-width: 2px;
+	border-color: red;
+
+	padding: 3px;
+}
+
+div.dessein0 {
+	
+	height: 61%;
+	width: 98%;
+
+
+	background: white;
+	
+	border-style: solid;
+	border-width: 5px;
+	border-color: darkgray;
+
+	padding: 3px;
+
+
+
+}
+
+
+div.legend0 {
+
+	width: 98%;
+	height: 37%;
+
+
+	background: white;
+
+	border-style: solid;
+	border-width: 3px;
+	border-color: darkgray;
+
+}
+
+div.dessein {
+
+	width: 99%;
+	height: 99%;
+
+	border-style: solid;
+	border-width: 2px;
+	border-color: red;
+
+}
+
+div.buttonsArea {
+
+	width: 38%;
+	height: 98%;
+
+	border-style: solid;
+	border-width: 2px;
+	border-color: red;
+
+	padding: 3px;
+	margin-right: 3px;
+
+	float: left;
+}
+
+div.legendGsocle {
+
+	width: 58%;
+	height: 98%;
+
+	padding: 3px;
+	margin-right: 3px;
+
+	border-style: solid;
+	border-width: 2px;
+	border-color: red;
+
+	float: left;
+}
+
+div.legendG {
+
+	width: 98%;
+	height: 85%;
+
+	padding: 3px;
+	margin-right: 3px;
+
+	border-style: solid;
+	border-width: 2px;
+	border-color: red;
+
+	overflow: auto;
+}
+
+div.legendTitle1 {
+
+	height: 30px;
+	width: 95%;
+	margin-left:auto;
+	margin-right:auto;
+	background: white;
+	font-size: 30px;
+	font-variant: small-caps;
+	font-weight: bold;
+	text-align:center;
+	text-decoration:underline;
+	text-transform: capitalize;
+	padding-bottom: 5px;
+
+}
+
+
+div.legendG2 {
+
+	width: 98%;
+	height: 95%;
+
+	padding: 3px;
+
+	border-style: solid;
+	border-width: 2px;
+	border-color: red;
+
+	overflow-y: auto;
+}
+
+
+div.boutons2Base{
+
+
+
+	height: 33%;
+	width: 99%;
+
+	margin-bottom: 2px;
+
+	border-style: solid;
+	border-width: 2px;
+	border-color: lightred;
+
+	padding: 2px;
+
+}
+
+
+div.boutonsSup {
+
+	height: 63%;
+	width: 99%;
+
+
+	border-style: solid;
+	border-width: 2px;
+	border-color: lightred;
+
+	padding: 2px;
+
+	overflow:auto;
+}
+
+
+button.b1{
+
+	margin: 2px;
+
+	height: 45%;
+	width: 20%;
+	background-color:lightsteelblue;
+
+}
+
+div.div2Buttons {
+	height: 45%;
+	width: 98%;
+
+
+}
+
+
+
+button#NewUpload {
+
+	width: 45%;
+	height:90%;
+
+	float: left;
+
+	-moz-box-shadow:inset 0px 1px 0px 0px #cae3fc;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #cae3fc;
+	box-shadow:inset 0px 1px 0px 0px #cae3fc;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #4197ee) );
+	background:-moz-linear-gradient( center top, #79bbff 5%, #4197ee 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#79bbff', endColorstr='#4197ee');
+	background-color:#79bbff;
+
+	-webkit-border-top-left-radius:20px;
+	-moz-border-radius-topleft:20px;
+	border-top-left-radius:20px;
+	-webkit-border-top-right-radius:20px;
+	-moz-border-radius-topright:20px;
+	border-top-right-radius:20px;
+	-webkit-border-bottom-right-radius:20px;
+	-moz-border-radius-bottomright:20px;
+	border-bottom-right-radius:20px;
+	-webkit-border-bottom-left-radius:20px;
+	-moz-border-radius-bottomleft:20px;
+	border-bottom-left-radius:20px;
+
+	text-indent:0;
+	border:1px solid #469df5;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:18px;
+	font-weight:bold;
+	font-style:normal;
+	line-height:30px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #287ace;
+
+}
+
+button#help0 {
+
+	width: 45%;
+	height:90%;
+
+	float: left;
+
+	-moz-box-shadow:inset 0px 1px 0px 0px #cae3fc;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #cae3fc;
+	box-shadow:inset 0px 1px 0px 0px #cae3fc;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #4197ee) );
+	background:-moz-linear-gradient( center top, #79bbff 5%, #4197ee 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#79bbff', endColorstr='#4197ee');
+	background-color:#79bbff;
+	
+	-webkit-border-top-left-radius:20px;
+	-moz-border-radius-topleft:20px;
+	border-top-left-radius:20px;
+	-webkit-border-top-right-radius:20px;
+	-moz-border-radius-topright:20px;
+	border-top-right-radius:20px;
+	-webkit-border-bottom-right-radius:20px;
+	-moz-border-radius-bottomright:20px;
+	border-bottom-right-radius:20px;
+	-webkit-border-bottom-left-radius:20px;
+	-moz-border-radius-bottomleft:20px;
+	border-bottom-left-radius:20px;
+
+	text-indent:0;
+	border:1px solid #469df5;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:18px;
+	font-weight:bold;
+	font-style:normal;
+	line-height:30px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #287ace;
+
+}
+
+div.divChoixDeroulant {
+   
+	height: 45%;
+	width: 98%;
+
+	margin-top: 2px;
+
+	-moz-box-shadow:inset 0px 1px 0px 0px #cae3fc;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #cae3fc;
+	box-shadow:inset 0px 1px 0px 0px #cae3fc;
+
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #4197ee) );
+	background:-moz-linear-gradient( center top, #79bbff 5%, #4197ee 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#79bbff', endColorstr='#4197ee');
+	background-color:#79bbff;
+
+	text-indent:0;
+
+	border:0px solid #469df5;
+
+	display:inline-block;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	line-height:30px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #287ace;
+
+ }
+
+div.divChoixDeroulant select {
+
+	height: 100%;
+	width: 100%;
+	
+	padding: 5px;
+	color:#ffffff;
+	background: transparent;
+	-webkit-appearance: none;
+
+	font-size: 20px;
+	line-height:15px;
+}
+
+div.divChoixDeroulant select optgroup {
+
+	height: 100%;
+	width: 100%;
+	
+	padding: 5px;
+	color:#ffffff;
+	background-color: #79bbff;
+	-webkit-appearance: none;
+
+	font-size: 20px;
+	line-height:15px;
+}
+
+option.opt00 {
+
+	color:#ffffff;
+	background-color:#79bbff;
+	font-weight: bold;
+
+
+}
+
+option.opt0 {
+
+	color:#ffffff;
+	background-color:#79bbff;
+
+
+}
+

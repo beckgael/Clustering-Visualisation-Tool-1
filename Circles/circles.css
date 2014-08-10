@@ -1,0 +1,241 @@
+div.legend {
+
+	height: 85%;
+	width: 99%;
+	border:1px solid lightsteelblue;
+	overflow-y:auto;
+}
+
+svg.legLine {
+	width: 100%;
+}
+
+
+
+
+div.info {
+	height: 200px;
+	width: 800px;
+}
+
+
+
+svg#circles {
+
+	height: 100%;
+	width: 95%;
+	background-color: lightsteelblue;
+
+	display: block;
+
+	margin-left: auto;
+	margin-right: auto;
+
+}
+
+
+
+g.cellCircles {
+    min-width: 40px;
+    min-height: 20px;
+    margin: 5px;
+    float: left;
+    text-align: center;
+    padding: 5px;
+    font-weight:bold;
+}
+
+
+ rect.frame:hover {
+	fill: black;
+	fill-opacity: 0.3;
+	stroke:green;
+	stroke-width:6;
+	stroke-opacity:0.8;
+	stroke:"steelblue";
+}
+
+
+rect.frame {
+	fill: white;
+	fill-opacity: 1;
+	stroke:black;
+	stroke-width:0;
+	stroke-opacity:0.3;
+}
+
+rect.test1 {
+	fill: red;
+	fill-opacity: 0.9;
+	stroke:black;
+	stroke-width:0;
+	stroke-opacity:0.3;
+}
+
+
+div.butAttributs {
+	height: 70%;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+div.butFormat {
+	height: 47%;
+	width: 100%;
+	margin-bottom: 5px;
+}
+
+
+
+button.attsButtons {
+
+	height: 40%;
+	width:20%;
+	margin: 3px;
+
+}
+
+
+div.divChoixAttVisible {
+
+	height: 120px;
+	width: 97%;
+
+	-moz-box-shadow:inset 0px 1px 0px 0px #cae3fc;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #cae3fc;
+	box-shadow:inset 0px 1px 0px 0px #cae3fc;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #4197ee) );
+	background:-moz-linear-gradient( center top, #79bbff 5%, #4197ee 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#79bbff', endColorstr='#4197ee');
+	background-color:#79bbff;
+
+	text-indent:0;
+	border:1px solid #469df5;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	line-height:30px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #287ace;
+	
+}
+
+div.divChoixAttVisible select {
+
+	height: 100%;
+	width: 100%;
+	
+	padding: 5px;
+	color:#ffffff;
+	background: transparent;
+	-webkit-appearance: none;
+
+
+    font-size: 18px;
+
+
+}
+
+
+div.cellsArea1 {
+
+	height: 98%;
+	width: 98%;
+
+	margin-top: 10px;
+	margin-right: auto;
+	margin-left: auto;
+
+	overflow: auto;
+
+	background-color: lightgray;
+
+}
+
+
+div.cellsArea22 {
+
+	height: 100%;
+	width: 98%;
+
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+
+
+optgroup.optgroup0 {
+
+}
+
+
+
+option.attsButtons {
+
+}
+
+
+
+
+button#Activation {
+	width: 97%;
+	height:30px;
+
+	-moz-box-shadow:inset 0px 1px 0px 0px #cae3fc;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #cae3fc;
+	box-shadow:inset 0px 1px 0px 0px #cae3fc;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #4197ee) );
+	background:-moz-linear-gradient( center top, #79bbff 5%, #4197ee 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#79bbff', endColorstr='#4197ee');
+	background-color:#79bbff;
+	-webkit-border-top-left-radius:20px;
+	-moz-border-radius-topleft:20px;
+	border-top-left-radius:20px;
+	-webkit-border-top-right-radius:20px;
+	-moz-border-radius-topright:20px;
+	border-top-right-radius:20px;
+	-webkit-border-bottom-right-radius:20px;
+	-moz-border-radius-bottomright:20px;
+	border-bottom-right-radius:20px;
+	-webkit-border-bottom-left-radius:20px;
+	-moz-border-radius-bottomleft:20px;
+	border-bottom-left-radius:20px;
+	text-indent:0;
+	border:1px solid #469df5;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	line-height:30px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #287ace;
+
+}
+
+
+
+input#dimYY {
+	height: 30px;
+	width: 97%;
+}
+
+
+button.lignCol {
+
+	float: left;
+	height: 30px;
+	width: 40%;
+
+	margin-right: auto;
+	margin-left: auto;
+
+
+}

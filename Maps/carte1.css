@@ -1,0 +1,16 @@
+    .departement {
+        cursor: pointer;
+    }
+ 
+    .departement:hover {
+        stroke: white;
+        stroke-width: 1px;
+    }
+
+    svg.france {
+    	height: 800px;
+    	width: 1600px;
+    	display: block;
+    	margin:auto;
+
+    }
