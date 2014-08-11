@@ -220,75 +220,39 @@ function plotForceLayout(nodesLinksData2,dataComp) {
 	Help0.text("Help");
 	Help0.on("click",function(d){ aideUser(); });
 
-	
-
-	//console.log(dataComp);
-
-
-
-	//console.log(nodesLinksData2);
 	var tabVall = objToAtt(dataComp);
-	//console.log(tabVall);
-	var clesAtt2 = d3.keys(tabVall);
-	//console.log(clesAtt2);
-	//console.log(Object.size(tabVall));
 
-
-
-//Zone de selection des attributs à visualiser
-var selecteurAttributAVisu = d3.select("div.boutonsSup")
-								.append("div")
-								.classed("divChoixDeroulant",true)
-								.style("background","lightgray");
-
-//Début du select
-var ChoixDeroulant = selecteurAttributAVisu.append("select")
-											.attr("id","choice0");
-
-//Sous titre des options disponibles
-var optGroup0 = ChoixDeroulant
-							.append("optgroup")
-							.attr("label","Veuillez selectionner une visualisation");
-
-//On créer les options en fonction du nb d'attributs
-	for (var i = 0; i < Object.size(tabVall); i++) {
-
-	var id1 = "Attribut"+i;
-
-	optGroup0.append("option")
-				.classed("opt0","true")
-				.attr("id",id1)
-				.attr("value",i)
-				.attr("selected",false)
-				.text(function(){ return clesAtt2[i];});
-
-	};
-
-//On va chercher l'option selectionnner
-var choice00 = document.getElementById("choice0");
-
-	choice00.addEventListener("click",function(e){
-
-		//console.log(choice00.selectedIndex);
-		d3.layout.force().stop();
-		d3.select("svg").remove();
-		plotForceLayoutInside(nodesLinksData2,choice00.selectedIndex,tabVall)
-
-
-	});
-
-//Fin zone de selection
-
-
-
-//plotForceLayoutInside(nodesLinksData2,0,tabVall);
+	plotForceLayoutInside(nodesLinksData2,0,tabVall,false,false,false,false,35);
 
 
 }
 
-function plotForceLayoutInside(data2,numAtt,dataComp1) {
+function plotForceLayoutInside(data2,numAtt,dataComp1,gravity0,friction0,chargeParam0,linkDistance0,rayMaxNeur0) {
+
+	//On nettoie l'ancien SVG si il est présent
+	d3.select("svg.forceLayout").remove();
+	d3.select("div.modifParamForceLay").remove();
+	d3.select("div.divChoixDeroulantMatAdj").remove();
 
 
+	//On teste les paramètres de force
+	var chargeParam1 = chargeParam0;
+	var linkDistance1 = linkDistance0;
+	var friction1 = friction0;
+	var gravity1 = gravity0;
+	//Si ce param a pour valeur faux, on lui attribut une val par defaut
+	if (!chargeParam1) {chargeParam1 = -300};
+	if (!linkDistance1) {linkDistance1 = 100};
+	if (!friction1) {friction1 = 0.7};
+	if (!gravity1) {gravity1 = 0.1};
+
+	var tabValParamForceLay = [gravity1,friction1,chargeParam1,linkDistance1];
+
+
+
+
+
+	//Initialisation visu
 	var width = 960,
 	    height = 500;
 
@@ -299,21 +263,119 @@ function plotForceLayoutInside(data2,numAtt,dataComp1) {
 
 	// On initialise le diag de force
 	var force = d3.layout.force()
-	    .charge(-300)
-	    .linkDistance(60)
-	    .friction(0.7)
-	    .gravity(0.2)
+	    .charge(chargeParam1)
+	    .linkDistance(linkDistance1)
+	    .friction(friction1)
+	    .gravity(gravity1)
 	    .size([width, height]);
 
 
 
 	//On prépare les données qui serviront à influencer le graph
 	var clesAtt = d3.keys(dataComp1);
+	
+	//console.log(dataComp1);
 	//console.log(clesAtt);
 	//console.log(dataComp1[clesAtt[numAtt]]);
+	
 	var color = d3.scale.linear().domain([d3.min(dataComp1[clesAtt[numAtt]]),d3.max(dataComp1[clesAtt[numAtt]])]).range(["pink","blue"]);
-	var cardScale = d3.scale.linear().domain([d3.min(dataComp1["card"]),d3.max(dataComp1["card"])]).range([3,35]);
+	var rayMaxNeur = rayMaxNeur0;
+	var cardScale = d3.scale.linear().domain([d3.min(dataComp1["card"]),d3.max(dataComp1["card"])]).range([3,rayMaxNeur]);
 	//console.log(data2.nodes)
+
+
+
+	//Zone de selection des attributs à visualiser
+	var selecteurAttributAVisu = d3.select("div.boutonsSup")
+									.append("div")
+									.classed("divChoixDeroulantMatAdj",true);
+
+	//Début du select
+	var ChoixDeroulant = selecteurAttributAVisu.append("select")
+												.attr("id","choice0");
+
+	//Sous titre des options disponibles
+	var optGroup0 = ChoixDeroulant
+								.append("optgroup")
+								.attr("label","Veuillez selectionner un attribut");
+
+
+	//On créer les options en fonction du nb d'attributs
+		for (var i = 0; i < Object.size(dataComp1); i++) {
+
+		var id1 = "Attribut"+i;
+
+		optGroup0.append("option")
+					.classed("opt0","true")
+					.attr("id",id1)
+					.attr("value",i)
+					.attr("selected",false)
+					.text(function(){ return clesAtt[i];});
+		};
+
+	//On va chercher l'option selectionnner
+	var choice00 = document.getElementById("choice0");
+
+	choice00.addEventListener("click",function(e){
+
+		//console.log(choice00.selectedIndex);
+		d3.layout.force().stop();
+		//d3.select("svg").remove();
+		plotForceLayoutInside(data2,choice00.selectedIndex,dataComp1,gravity1,friction1,chargeParam1,linkDistance1,rayMaxNeur);
+	});
+
+
+
+
+
+
+
+	//Zone de modification des paramètre
+
+	var modifParam = d3.select("div.boutonsSup")
+						.append("div")
+						.classed("modifParamForceLay",true);
+
+	var linkDist = modifParam.append("input")
+								.classed("paramForceLay",true)
+								.attr("type","text")
+								.attr("value","Gravity 0<x<1");
+
+	var linkDist = modifParam.append("input")
+								.classed("paramForceLay",true)
+								.attr("type","text")
+								.attr("value","Friction 0<x<1");
+
+	var linkDist = modifParam.append("input")
+								.classed("paramForceLay",true)
+								.attr("type","text")
+								.attr("value","Charge -500<x<500");
+
+	var linkDist = modifParam.append("input")
+								.classed("paramForceLay",true)
+								.attr("type","text")
+								.attr("value","linkDistance 0<x<200");
+
+	var linkDist = modifParam.append("input")
+								.classed("paramForceLay",true)
+								.attr("type","text")
+								.attr("value","Rmax Neurone 1<x<60");
+
+
+	modifParam.append("button")
+				.attr("id","ValidChoiceForceLay")
+				.text("Effectuer les changements");
+
+	//Tab des val pour le forceLayout
+	var tabValBase = [data2,choice00.selectedIndex,dataComp1];
+
+	document.querySelector("#ValidChoiceForceLay").addEventListener("click",function(){ ModifParamForceLay(tabValBase,tabValParamForceLay); });
+
+
+
+
+
+
 
 
 
@@ -364,3 +426,27 @@ function plotForceLayoutInside(data2,numAtt,dataComp1) {
         .attr("cy", function(d) { return d.y; });
   });
 };
+
+
+
+function ModifParamForceLay(tabValBase,tabValParamForceLay) {
+
+	var valInTab = document.querySelectorAll("input.paramForceLay");
+
+	var inputVal;
+	var tabBoolToChange = tabValBase;
+	
+	for (var i = 0; i < valInTab.length; i++) {
+		inputVal = valInTab[i].value;
+		inputVal = +inputVal;
+		if (!isNaN(inputVal)) {
+			tabBoolToChange.push(inputVal)
+		}
+		else {
+			tabBoolToChange.push(tabValParamForceLay[i])
+		};
+	};
+
+	//console.log(tabBoolToChange);
+	plotForceLayoutInside(tabBoolToChange[0],tabBoolToChange[1],tabBoolToChange[2],tabBoolToChange[3],tabBoolToChange[4],tabBoolToChange[5],tabBoolToChange[6],tabBoolToChange[7])
+}
