@@ -1,4 +1,4 @@
-function degCol5(dimY1,rectTaillUser,dataUp){
+function degCol5(dimY1,rectTaillUser,dataUp,boolLign){
 
 			//On efface pour mieux redessiner =)
 			commeNeuf();
@@ -16,12 +16,12 @@ var boutons2 = d3.select("div.legendG2")
 						.classed("boutons2",true)
 						.attr("id","b2");
 
-		tracerCell5(dimY1,rectTaillUser,dataUp);
+		tracerCell5(dimY1,rectTaillUser,dataUp,boolLign);
 
 
 };
 
-function tracerCell5(dimY1,rectTaillUser,dataUp2) {
+function tracerCell5(dimY1,rectTaillUser,dataUp2,boolLign) {
 
 	//console.log(dataUp2);
 
@@ -80,7 +80,7 @@ function tracerCell5(dimY1,rectTaillUser,dataUp2) {
 	var tabIndTaill = [];
 	var tabTaill = [];
 
-	console.log(ObjF);
+	//console.log(ObjF);
 	for (var i = 0; i < ObjF["taille"].length; i++) {
 		if (ObjF["taille"][i] == 0) {}
 		else { var obj = { "index" : i , "taille" : ObjF["taille"][i] }
@@ -153,33 +153,45 @@ var gg3 = svg3.selectAll("g.svgG")
 	gg3.transition().duration(1500).ease("linear")
 							.attr("transform", function(d,i) { //console.log(d);
 			    	var posId = posInd(i,dimY)	// retourne les indices de pos
-			    	return "translate(" + posId[0] * (rectTaill+cellMargin) + "," + posId[1] * (rectTaill+cellMargin) + ")"; });
+			    	return inversLigneColon(boolLign,posId,rectTaill,cellMargin); });
 
 
+//console.log(tabIndTaill);
 
 var cell1 = gg3.append("rect")
 				.classed("cellRect",true)
 		        .attr("x", rectPadding)
 		        .attr("y", rectPadding)
 		        .attr("height",function(d,i){
+	        	try{
+
 		        	if (d && i == tabIndTaill[indPostabTaill3]["index"]) {
 		        		indPostabTaill3++;
 		        		return ((((rezScale[indPostabTaill3-1]))/(100))*rectTaill);
 		        	}
 		        	else { return 0; }
+		        	}
+		        catch(e) {console.log(e);}
 		        })
 		        .attr("width",function(d,i){
+		        try{
 		        	if (d && i == tabIndTaill[indPostabTaill2]["index"]) {
 		        		indPostabTaill2++;
 		        		return ((((rezScale[indPostabTaill2-1]))/(100))*rectTaill);
 		        	}
 		        	else { return 0; }
+		        	}
+		        catch(e) {}
+		        	
 		        })
 				.attr("fill", function(d,i){ 
+		        try{
 					if (d && i == tabIndTaill[indPostabTaill]["index"]) {
 						indPostabTaill++;
 						return scale1(d);}
 					else { return "white"}
+		        	}
+		        catch(e) {}
 										});
 				//.on("dblclick",function(d,i){foncInfo5(ObjF,i);});	//useless si même fct sur le deuxieme rect qui est "au-dessus"
 
@@ -226,12 +238,16 @@ function foncInfo5(datas,index1) {
 	var info1 = d3.select("div.legendG2").append("div")
 								.classed("info1",true);
 
-	info1.append("p").style("font-size","20px")
+	info1.append("p")
+				.style("text-align","left")
+				.style("font-size","20px")
 					.text(" Valeurs des attributs"); // on fait une marge freestyle
 
 	for (var i in datas) {
 		var text1 = i + " : " + datas[i][index1];
-		info1.append("p").style("font-size","15px").text(text1);
+		info1.append("p")
+					.style("text-align","left")
+					.style("font-size","15px").text(text1);
 
 	};
 
@@ -275,7 +291,15 @@ function barchartInfo5(dataGen,obj1,index5){
 	var graph = d3.select("div.legendG2").append("div")
 	 						.classed("barGraph",true);
 
-	var svg1 = graph.append("svg").classed("barchart",true);
+	var lgSvg = Object.size(obj1);
+
+	console.log(dataGen);
+	console.log(obj1);
+	console.log(lgSvg);
+
+	var svg1 = graph.append("svg")
+						.classed("barchart",true)
+						.attr("height",lgSvg*20 + 150);
 
 	
 	for (var index2 = 0; index2 < Object.size(obj1); index2++) {
@@ -501,6 +525,16 @@ for (var clee in confCell) {
 
 
 	});
+
+
+	d3.select("div.boutonsSup").append("button")
+								.classed("lignCol",true)
+								.on("dblclick",function(){ degCol5(confCell.dimY,confCell.rectTaill,dataF,true);})
+								.text("dblclick : By Column");
+	d3.select("div.boutonsSup").append("button")
+								.classed("lignCol",true)
+								.on("dblclick",function(){ degCol5(confCell.dimY,confCell.rectTaill,dataF,false);})
+								.text("dblclick : By Raw");
 
 
 

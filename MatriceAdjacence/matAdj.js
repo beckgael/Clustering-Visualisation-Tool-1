@@ -411,6 +411,7 @@ function plotForceLayoutInside(data2,numAtt,dataComp1,gravity0,friction0,chargeP
       .attr("r", function(d,i){return cardScale(dataComp1["card"][i])})	//fixe la taille du noeud en fonction de la taille du cluster associé
       .style("fill", function(d,i) { return color(dataComp1[clesAtt[numAtt]][i]); })
       .on("dblclick",dblclick)
+      .on("click",function(d,i){foncInfo5(dataComp1,i);})
       .call(drag);
 
   node.append("title")
