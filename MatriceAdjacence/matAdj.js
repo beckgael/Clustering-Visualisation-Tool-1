@@ -176,31 +176,14 @@ function arrayToJSON(tab1) {
 		};
 	};
 
-	//console.log(nodesLinksData);
-	//console.log(nodesLinksData["links"]);
-
-	/*
-	//Useless to delete les connections des noeurds vers eux même
-	// On supprime les noeuds équivalent aux éléments diagonaux de la matrice sauf le premiers et le dernier sinon on perd des noeuds.
-	for (var i = 1; i < nodesLinksData["links"].length-1; i++) {
-		if (nodesLinksData["links"][i]["source"] ==  nodesLinksData["links"][i]["target"]) {
-			
-			//console.log(nodesLinksData["links"][i]["source"]," = ",nodesLinksData["links"][i]["source"])
-			nodesLinksData["links"].splice(i,1);
-			//nodesLinksData["nodes"].splice(i,1);
-			i--;
-	}
-	};
-	*/
-
-	//console.log(nodesLinksData);
-
 	return nodesLinksData;
 }
 
 
 
-
+function aideUserNeur() {
+	d3.select("div.legendG").text("Cliquez sur un neuronne afin d'obtenir ses informations.	\nModifier les paramètre du graphe à l'aide des entrées à votre gauche (cf D3 doc).	\nChoissisez quel attribut visualiser à l'aide du menu déroulant. \nVous pouvez déplacer les neuronnes par glisser/déposer, les relacher en double cliquant dessus.");
+}
 
 function plotForceLayout(nodesLinksData2,dataComp) {
 
@@ -218,7 +201,7 @@ function plotForceLayout(nodesLinksData2,dataComp) {
 
 	var Help0 = d3.select("div.boutons2Base").append("button").attr("id","help0");
 	Help0.text("Help");
-	Help0.on("click",function(d){ aideUser(); });
+	Help0.on("click",function(d){ aideUserNeur(); });
 
 	var tabVall = objToAtt(dataComp);
 
@@ -246,7 +229,7 @@ function plotForceLayoutInside(data2,numAtt,dataComp1,gravity0,friction0,chargeP
 	if (!friction1) {friction1 = 0.7};
 	if (!gravity1) {gravity1 = 0.1};
 
-	var tabValParamForceLay = [gravity1,friction1,chargeParam1,linkDistance1];
+	var tabValParamForceLay = [gravity1,friction1,chargeParam1,linkDistance1,rayMaxNeur0];
 
 
 
@@ -448,6 +431,5 @@ function ModifParamForceLay(tabValBase,tabValParamForceLay) {
 		};
 	};
 
-	//console.log(tabBoolToChange);
 	plotForceLayoutInside(tabBoolToChange[0],tabBoolToChange[1],tabBoolToChange[2],tabBoolToChange[3],tabBoolToChange[4],tabBoolToChange[5],tabBoolToChange[6],tabBoolToChange[7])
 }

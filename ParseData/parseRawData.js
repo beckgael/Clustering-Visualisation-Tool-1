@@ -38,7 +38,6 @@ function clone(obj) {
 
 
 // transforme un fichier csv en un tableau de tableau
-// IL FAUT UN ESPACE APRÈS LE NOM DU DERNIER ATTRIBUT SINON ON COUPE SA DERNIÈRE LETTRE
 // N'ACCEPTE QUE DES VALEURS NUMÉRIQUES COMME ATTRIBUT
 // N'ACCEPTE PAS ENCORE DES ATTRIBUTS STRING
 function traitDataCsv(data) {
@@ -108,7 +107,7 @@ function traitDataCsv(data) {
 
   var toChangestr = tabAtt[tabAtt.length-1];  // on selectionne le dernier attribut
 
-      toChangestr = toChangestr.slice(0,toChangestr.length-1) // on enlève l'espace invisible après le dernier attribut, sinon on se retrouve avec '"att"' au lieu de 'att'
+      //toChangestr = toChangestr.slice(0,toChangestr.length-1) // on enlève l'espace invisible après le dernier attribut, sinon on se retrouve avec '"att"' au lieu de 'att'
  
       while (toChangestr.search(/ /) != -1) { 
           toChangestr = toChangestr.slice(0,toChangestr.length-1) // on enlève l'espace après le dernier attribut

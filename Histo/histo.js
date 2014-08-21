@@ -122,7 +122,7 @@ document.querySelector('#allCircles1').onclick = function(){ maj4(10,dimY,dataUp
 		        .attr("x", padding / 2)
 		        .attr("y", padding / 2)
 		        .attr("width", rectHistoWidth*nbAtt + padding)
-		        .attr("height", size - padding)
+		        .attr("height", 90)
 				.on("dblclick",function(d,i){foncInfoCircles(dataUp2[1],i);});
 
 	        cell.append("text")
@@ -306,11 +306,11 @@ function ModifDimSizeHisto(dataUp3,lignOrCol){
 // range les cellules par colonne si vrai, par ligne si faux
 function inversLigneColonHisto(unBool,lesPosistionSurGrille,recTail,celMarg,nbAtt2,rectHistoWidth2,padding2) {
 	if (unBool) {
-		return "translate(" + (lesPosistionSurGrille[0] * (nbAtt2*rectHistoWidth2+padding2+2)) + "," + (lesPosistionSurGrille[1] * (recTail+celMarg)+5) + ")"
+		return "translate(" + (lesPosistionSurGrille[0] * (nbAtt2*rectHistoWidth2+padding2+2)) + "," + (lesPosistionSurGrille[1] * (95)+5) + ")"
 	}
 
 	else {
-		return "translate(" + (lesPosistionSurGrille[1] * (nbAtt2*rectHistoWidth2+padding2+2)) + "," + (lesPosistionSurGrille[0] * (recTail+celMarg)+5) + ")"
+		return "translate(" + (lesPosistionSurGrille[1] * (nbAtt2*rectHistoWidth2+padding2+2)) + "," + (lesPosistionSurGrille[0] * (95)+5) + ")"
 	}
 
 }

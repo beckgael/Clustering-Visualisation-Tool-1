@@ -13,7 +13,7 @@ Object.size = function(obj) {
 
 
 
-
+// Works nicely
 //  to upgrade
 function tabScale(tab2,domain,nbAttr) {
 

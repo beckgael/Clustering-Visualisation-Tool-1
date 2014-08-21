@@ -1,55 +1,33 @@
-function degCol5(dimY1,rectTaillUser,dataUp,boolLign){
-
-			//On efface pour mieux redessiner =)
-			commeNeuf();
+function tracerCell(dimY1,rectTaillUser,dataUp2,boolLign) {
 
 
+	//On efface pour mieux redessiner =)
+	commeNeuf();
+	
+	//On refait les socles
+	var boutons12 = d3.select("div.legendG2")
+							.append("div")
+							.classed("boutons12",true);
 
-		//On refait les socles
-
-var boutons12 = d3.select("div.legendG2")
-						.append("div")
-						.classed("boutons12",true);
-
-var boutons2 = d3.select("div.legendG2")
+	var boutons2 = d3.select("div.legendG2")
 						.append("div")
 						.classed("boutons2",true)
 						.attr("id","b2");
 
-		tracerCell5(dimY1,rectTaillUser,dataUp,boolLign);
-
-
-};
-
-function tracerCell5(dimY1,rectTaillUser,dataUp2,boolLign) {
-
-	//console.log(dataUp2);
 
 	var to1,to2;
 	to1 = objToAtt(dataUp2[0]);
 	to2 = objToAtt(dataUp2[1]);
 
-	//console.log(to1);
-	//console.log(to2);
-
+	//On concatène to1 et to2
 	for (var j in to2) {
 		to1[j] = to2[j];
 	}
-	//console.log(to1);
 
 	var ObjF = to1;
-
-
 	var clesF = d3.keys(ObjF);
-
 	var nbElem = ObjF[clesF[0]].length;
-
 	var nbCells = Object.size(ObjF);
-	var lala;
-	if (nbCells <= 100) { lala = 25 }
-	else if (100 < nbCells <= 200) { lala = 20 }
-	else if (200 < nbCells <= 400) { lala = 15 }
-
 
 	var rectTaill = rectTaillUser;  // 25 de base
 	var dimY = dimY1;
@@ -60,8 +38,6 @@ function tracerCell5(dimY1,rectTaillUser,dataUp2,boolLign) {
 	var bigCellWidth = (2*cellMargin)+(dimX*rectTaill)+((dimX-1)*(2*cellMargin))+bigCellWidthMarg;
 	var bigCellHeight = (2*cellMargin)+(dimY*rectTaill)+((dimY-1)*(2*cellMargin))+bigCellHeightMarg;
 	var rectPadding =  rectTaill;
-	//(15+bigCellWidthMarg);
-	//console.log(bigCellHeight);
 
 	// On regroupe toute ces données dans un obj pour les réutiliser au besoin dans des fonctions
 	var confCell = {};
@@ -80,7 +56,7 @@ function tracerCell5(dimY1,rectTaillUser,dataUp2,boolLign) {
 	var tabIndTaill = [];
 	var tabTaill = [];
 
-	//console.log(ObjF);
+	console.log(ObjF);
 	for (var i = 0; i < ObjF["taille"].length; i++) {
 		if (ObjF["taille"][i] == 0) {}
 		else { var obj = { "index" : i , "taille" : ObjF["taille"][i] }
@@ -91,10 +67,7 @@ function tracerCell5(dimY1,rectTaillUser,dataUp2,boolLign) {
 	var indPostabTaill = 0;	// indice permettant le repérage des prototypes adéquat lors du traçage par d3
 	var indPostabTaill2 = 0;	// indice permettant le repérage des prototypes adéquat lors du traçage par d3
 	var indPostabTaill3 = 0;	// indice permettant le repérage des prototypes adéquat lors du traçage par d3
-	var tailleMax = d3.max(tabTaill);
-	//console.log(tabIndTaill);
-	//console.log(tailleMax);
-	//console.log(rectTaill);
+
 
 	var scalePropRect = d3.scale.linear().domain([d3.min(tabTaill),d3.max(tabTaill)]).range([20,100]);
 	var rezScale = [];
@@ -156,7 +129,7 @@ var gg3 = svg3.selectAll("g.svgG")
 			    	return inversLigneColon(boolLign,posId,rectTaill,cellMargin); });
 
 
-//console.log(tabIndTaill);
+console.log(tabIndTaill);
 
 var cell1 = gg3.append("rect")
 				.classed("cellRect",true)
@@ -239,7 +212,7 @@ function foncInfo5(datas,index1) {
 								.classed("info1",true);
 
 	info1.append("p")
-				.style("text-align","left")
+				.style("text-align","center")
 				.style("font-size","20px")
 					.text(" Valeurs des attributs"); // on fait une marge freestyle
 
@@ -529,11 +502,11 @@ for (var clee in confCell) {
 
 	d3.select("div.boutonsSup").append("button")
 								.classed("lignCol",true)
-								.on("dblclick",function(){ degCol5(confCell.dimY,confCell.rectTaill,dataF,true);})
+								.on("dblclick",function(){ tracerCell(confCell.dimY,confCell.rectTaill,dataF,true);})
 								.text("dblclick : By Column");
 	d3.select("div.boutonsSup").append("button")
 								.classed("lignCol",true)
-								.on("dblclick",function(){ degCol5(confCell.dimY,confCell.rectTaill,dataF,false);})
+								.on("dblclick",function(){ tracerCell(confCell.dimY,confCell.rectTaill,dataF,false);})
 								.text("dblclick : By Raw");
 
 
@@ -632,10 +605,10 @@ function ModifDimSizeCells(data){
 	//console.log(val1);
 
 
-	if (isNaN(val1) && isNaN(val2)) { degCol5(10,25,data); }
-	else if (isNaN(val1) && !isNaN(val2)) { degCol5(10,val2,data); }
-	else if (!isNaN(val1) && isNaN(val2)) { degCol5(val1,25,data); }
-	else { degCol5(val1,val2,data); }
+	if (isNaN(val1) && isNaN(val2)) { tracerCell(10,25,data); }
+	else if (isNaN(val1) && !isNaN(val2)) { tracerCell(10,val2,data); }
+	else if (!isNaN(val1) && isNaN(val2)) { tracerCell(val1,25,data); }
+	else { tracerCell(val1,val2,data); }
 
 };
 

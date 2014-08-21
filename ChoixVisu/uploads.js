@@ -212,7 +212,7 @@ var choice00 = document.getElementById("choice0");
 			case 0 : circles(dataEncT[0])
 						break;
 
-			case 1 : degCol5(10,25,dataEncT[0],true);
+			case 1 : tracerCell(10,25,dataEncT[0],true);
 						break;
 
 			case 2 : degColHisto(10,25,dataEncT[0]);
@@ -240,7 +240,7 @@ var choice00 = document.getElementById("choice0");
 			case 0 : circles(dataEncT[0])
 						break;
 
-			case 1 : degCol5(10,25,dataEncT[0]);
+			case 1 : tracerCell(10,25,dataEncT[0]);
 						break;
 
 			case 2 : degColHisto(10,25,dataEncT[0]);
