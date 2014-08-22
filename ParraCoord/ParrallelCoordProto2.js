@@ -1,4 +1,4 @@
-function parraCoord2() {
+function parralelCoord() {
 
     //On efface pour mieux redessiner =)
     commeNeuf();
@@ -33,11 +33,11 @@ var svg = d3.select("div.dessein")
 
 d3.csv(
   //"../../data/prototype.csv"
-  "Data/data4.csv"
+  "../../DataLIPN/traitée/1/Prototypes.csv"
   , function(flowers) {
 
       //On récupère la valeur taille des prototypes
-    d3.csv("Data/data3.csv", function(data5){ 
+    d3.csv("../../DataLIPN/traitée/1/Cardinalités.csv", function(data5){ 
     var t1 = extra13(data5);
     var tabTaille = t1[1]     //On récupère la valeur taille des prototypes
     //console.log(tabTaille);

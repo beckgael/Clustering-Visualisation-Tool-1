@@ -1,13 +1,28 @@
 div.legend {
 
-	height: 85%;
+	height: 50%;
 	width: 99%;
 	border:1px solid lightsteelblue;
 	overflow-y:auto;
+
+	margin-right: auto;
+	margin-left: auto;
 }
 
 svg.legLine {
 	width: 100%;
+}
+
+div.HelpCircles {
+
+	height: 50%;
+	width: 98%;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: lightgray;
+
+	text-align: center;
+	font-size: 18px;
 }
 
 

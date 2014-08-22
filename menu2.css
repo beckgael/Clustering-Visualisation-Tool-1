@@ -57,7 +57,7 @@ div.legendG2socle {
 div.dessein0 {
 	
 	height: 61%;
-	width: 98%;
+	width: 99%;
 
 
 	background: white;
@@ -75,7 +75,7 @@ div.dessein0 {
 
 div.legend0 {
 
-	width: 98%;
+	width: 99.5%;
 	height: 37%;
 
 
@@ -108,18 +108,20 @@ div.buttonsArea {
 	border-color: red;
 
 	padding: 3px;
-	margin-right: 3px;
+	margin-left: 3px;
+	margin-right: auto;
 
 	float: left;
 }
 
 div.legendGsocle {
 
-	width: 58%;
+	width: 59%;
 	height: 98%;
 
 	padding: 3px;
 	margin-right: 3px;
+	margin-left: auto;
 
 	border-style: solid;
 	border-width: 2px;

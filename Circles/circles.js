@@ -44,17 +44,15 @@ function circlesIn(toto,dimMap,dataUp2,boolLigne) {
 
 
 
-
-
-
+	//	Déclarations des variables
   var size = 150,		// taille rect et ...
       padding = 10;		// espacement
 
   var 	data2 = [],	// tableau de tableau des valeurs des attributs
-  		nbAtt,	// nombre d'attributs des objets
+  		nbAtt2,	// nombre d'attributs des objets
   		nbObj,	// nopmbre d'objets
   		scaleTab2,	// tableau des echelles associé à chaque attribut
-  		attrNames,	// tableau des noms des attributs
+  		attrNames2,	// tableau des noms des attributs
   		strIndex;	// tableau des indices des attributs de type string
 
   	var rectTaille = size-padding;
@@ -67,12 +65,16 @@ function circlesIn(toto,dimMap,dataUp2,boolLigne) {
 	var bigCellWidth = (2*cellMargin)+(dimX*rectTaill)+((dimX-1)*(2*cellMargin))+bigCellWidthMarg;
 	var bigCellHeight = (2*cellMargin)+(dimY*rectTaill)+((dimY-1)*(2*cellMargin))+bigCellHeightMarg;
 	var rectPadding =  (11+bigCellWidthMarg)/2;
+	var coul = d3.scale.category20();
 
-	var coul = d3.scale.category10();
+	attrNames2 = Object.keys(ObjF);
+	//console.log(attrNames2);
+	nbAtt2 = Object.size(dataRezz[0]);
+	//console.log(nbAtt2);
 
-		//On efface pour mieux redessiner
-		commeNeuf();
-		legendCircle();
+	//On efface pour mieux redessiner
+	commeNeuf();
+	legendCircle(nbAtt2);
 
 	d3.selectAll("div.butAttributs button").remove();
 	d3.select("div.boutons1").remove();
@@ -119,36 +121,6 @@ function circlesIn(toto,dimMap,dataUp2,boolLigne) {
  var boutonsAtt = d3.select(".boutonsSup").append("div")
  							.classed("butAttributs",true);
 
-/*
-	d3.select("div.butAttributs").append("button")
-			.attr("class","attsButtons")
-			.attr("id","allCircles1")
-			.text("Tous");
-
-document.querySelector('#allCircles1').onclick = function(){ circlesIn(10,dimY,dataUp2); };
-*/
-
-
-	//console.log(dataUp2);
-	//console.log(ObjF);
-	//console.log(dataUp2[0]);
-
-	var dataTemp = objToAtt(dataUp2[0]);
-	var dataTemp2 = objToAtt(dataUp2[0]);
-	for (var i in dataTemp) {
-		data2.push(dataTemp[i]);
-	};
-
-	//console.log(data2);
-
-	//data2 est un tableau de tableaux, ou chacun rpz l'ensemble des valeurs d'un att
-
-	attrNames = Object.keys(dataUp2[0][0]);
-	attrNames2 = Object.keys(ObjF);
-	//console.log(attrNames2);
-	nbAtt = data2.length;
-	var nbAtt2 = Object.size(dataRezz[0]);
-	//console.log(nbAtt2);
 
 
 		//On crée les cellules
@@ -230,7 +202,7 @@ var trans1 = cell.append("circle")
 
 
 	//	Legend Text
-
+/*
 	d3.select("svg.legLine").append("text")
 		.attr("font-size","20px")
 		.attr("transform", function() {	return "translate(10,"+(nbAtt2*20 + 40)+")";		})
@@ -257,17 +229,14 @@ var trans1 = cell.append("circle")
 		.attr("font-size","20px")
 		.attr("transform", function() {	return "translate(10,"+(nbAtt2*20 + 130)+")";		})
 		.text("visualiser les attributs de manière indépendante.");
-
+*/
 
 	//Selection des attributs à observer
 	// Suprime les cercles non selectionnés
-
-
-	
 if (toto.length == 0) {}
 else if (toto != null) {
     for (var indo1=0; indo1<nbAtt2; indo1++) {
-		if (typeof dataUp2[0][0][attrNames2[indo1]] !== "number") {}
+		if (typeof ObjF[attrNames2[indo1]][0] !== "number") {}
 		else if (toto.indexOf(indo1) != -1) {}	// si on trouve l'att n° indo1 dans le tableau on le laisse
     	else {				//sinon on supprime les cercles corespondants
 
@@ -299,7 +268,7 @@ else if (toto != null) {
 
 	// On construit les boutons pour afficher les attributs souhaités
     for (var indo1=0; indo1<nbAtt2; indo1++) {
-		if (typeof dataUp2[0][0][attrNames[indo1]] !== "number") {}
+		if (typeof ObjF[attrNames2[indo1]][0] !== "number") {}
     	else{
 
     		var id1 = "circleA"+indo1;
@@ -309,18 +278,14 @@ else if (toto != null) {
 					.attr("id",id1)
 					.attr("value",indo1)
 					.attr("selected",false)
-					.text(function(){ return attrNames[indo1];});
-
-			//id1 = "#"+id1;
-			//document.querySelector(id1).onclick = function(){ circlesIn(this.value,dimY,dataUp2); };
-	
+					.text(function(){ return attrNames2[indo1];});
 			}	
 	}
 
 	butAct.on("click",function() {
 
 	var lol = document.getElementById("AttVisible");
-	var tabElemSelect = [];
+	var tabElemSelect = [];	// Tab des options selectionnées
 
 	for (var i = 0; i < lol.options.length; i++) {
 		//si l'option est selectionnée, on met son indice dans le tableau des options selectionnées
@@ -331,6 +296,9 @@ else if (toto != null) {
 	//console.log(tabElemSelect);
 	circlesIn(tabElemSelect,dimY,dataUp2,boolLigne);
 	});
+
+
+	document.querySelector("#help0").addEventListener("click",function(){helpUserCircles();});
 	
 
 
@@ -341,19 +309,6 @@ else if (toto != null) {
 
 
 
-
-function legendCircle(){
-
-      // Zone de légende
-  var legend1 = d3.select("div.legendG").append("div")
-					.classed("legend",true);
-
-	//Création légend
-	legend1.append("svg").classed("legLine",true)
-						.attr("height",900)
-						.attr("width",900);
-
-}
 
 
 
@@ -412,22 +367,6 @@ function ModifDimSizeCircles(dataUp3,lignOrCol){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //  to upgrade
 function tabScaleGen(Obj55,attNames55,range1,nbAttr) {
 
@@ -453,71 +392,7 @@ function tabScaleGen(Obj55,attNames55,range1,nbAttr) {
 };
 
 
-function propagEvent(){
 
-	console.log(document);
-	console.log(window);
-
-
-	var dessein = document.getElementsByClassName("dessein");
-	var dessein2 = document.querySelectorAll("div.dessein");
-	console.log(dessein);
-	console.log(dessein2);
-
-	//dessein.getElementsByClassName("cellCircles");
-
-	var dessein3 = d3.select("div.dessein");
-	var svg = d3.select("svg");
-
-	console.log(dessein3);
-	console.log(svg);
-	console.log(svg[0]);
-	console.log(svg[0][0]);
-	console.log(svg[0][0].childNodes);
-	var lol = svg[0][0].childNodes;
-	console.log(lol);
-	console.log(lol.item(5));
-	console.log(lol[5]);
-
-
-	var svgNodes = svg[0][0].getElementsByClassName("cellCircles");
-	console.log(svgNodes);
-	console.log(svgNodes[0]);
-	console.log(svgNodes.item(5));
-
-
-
-
-
-
-
-
-	var cells = document.getElementsByClassName('cellCircles');
-	var cells2 = document.querySelectorAll("g.cellCircles");
-	var socle = document.getElementById('circles');
-	//console.log(cells);
-	//console.log(cells2);
-
-	//console.log(cells.item(5));
-	//console.log(typeof cells);
-	//console.log(cells);
-	//console.log(cells.item(5));
-	//console.log(socle);
-
-	var cells3 = d3.selectAll("g.cellCircles");
-	//console.log(cells3);
-
-	//var lala = d3.select(".circles");
-	//console.log(lala);
-
-
-	//for (var i in cells) { console.log(i);}
-
-	//var cell1 = cells[0];
-	//console.log(cells.item);
-
-
-}
 
 // range les cellules par colonne si vrai, par ligne si faux
 function inversLigneColon(unBool,lesPosistionSurGrille,recTail,celMarg) {
@@ -528,5 +403,38 @@ function inversLigneColon(unBool,lesPosistionSurGrille,recTail,celMarg) {
 	else {
 		return "translate(" + (lesPosistionSurGrille[1] * (recTail+celMarg)+5) + "," + (lesPosistionSurGrille[0] * (recTail+celMarg)+5) + ")"
 	}
+
+}
+
+
+
+function legendCircle(nbAtt){
+
+      // Zone de légende
+  var legend1 = d3.select("div.legendG").append("div")
+					.classed("legend",true);
+
+	//Création légend
+	legend1.append("svg").classed("legLine",true)
+						.attr("height",nbAtt*25);
+
+}
+
+
+
+
+function helpUserCircles() {
+
+	d3.select("div.HelpCircles").remove();
+
+	d3.select("div.legendG").append("div")
+							.classed("HelpCircles",true)
+							.text("Aide pour l'utilisation de la visualisations sous forme de cercles.\n"
+									+"Double-cliquez sur une cellule pour des informations complémentaires. "
+									+"Vous pouvez également choisir la disposition des cellules "
+									+"avec le champs à votre gauche en entrant un valeur de remplissage par ligne ou colonne ou encore "
+									+"visualiser les attributs de manière indépendante à l'aide du menu déroulant."
+								);
+
 
 }

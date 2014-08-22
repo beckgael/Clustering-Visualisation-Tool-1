@@ -287,3 +287,165 @@ function yoInd(){
 
 
 
+
+
+
+
+
+// Gèrer l'upload des matrices d'adjacences
+// useless
+function upldMatAdj() {
+
+  commeNeuf();
+
+
+  d3.select("div.boutons2Base").remove();
+  d3.select("div.boutonsSup").remove();
+  d3.select("div.buttonsArea").append("div").classed("boutons2Base",true);
+  d3.select("div.buttonsArea").append("div").classed("boutonsSup",true);
+
+
+  var UpldButtonZ = d3.select("div.boutons2Base").append("div")
+                          .classed("UplArea",true);
+
+  var divUp1 = UpldButtonZ;
+
+  divUp1.text("Fichier Matrice Adjacence");
+  divUp1.append("input").attr("id","myfile")
+              .classed("input0",true)
+              .attr("type","file")  // on indique qu'on cherche un fichier
+              .attr("accept","text/json");
+
+
+  UpldButtonZ.append("button")
+          .attr("id","validF")
+          .text("Valider la selection")
+
+  var bouttonF = document.querySelector('#validF');
+  var boutton1 = document.querySelector('#myfile');
+
+  var dataF = [];
+
+
+  /*
+Idéalement il faut gérer l'exécution de la function finale sur les donnés dl/traitées
+en function de la vitesse d'upload, cependant on peux penser qu'il s'agit de fichier csv
+de taille < 1mo et donc "immédiatement" upl et donc functionFinale est exéc par B2
+  */
+  bouttonF.onclick = function(e) {
+
+
+    var reader = new FileReader();
+    reader.onload = function() { 
+
+      //traitDataJson1(reader.result);
+      dataF.push(reader.result);  // on insérer dans dataF le tab des valeurs du fichier upldé
+      //console.log(dataF);
+      matriAdjVisu(dataF);
+     };
+    reader.readAsText(boutton1.files[0]);
+
+  };
+
+}
+
+
+//  Seconde P, après upload mat adj
+// useless
+
+function matriAdjVisu(data) {
+
+  //console.log(data);
+  var obj = $.parseJSON(data);  // on parse le fichier JSON en array JS à l'aide de Jquery
+  console.log(obj);
+
+  commeNeuf();
+  d3.select("div.boutons2Base").remove();
+  d3.select("div.boutonsSup").remove();
+  d3.select("div.buttonsArea").append("div").classed("boutons2Base",true);
+  d3.select("div.buttonsArea").append("div").classed("boutonsSup",true);
+
+  var div2Buttons = d3.select("div.boutons2Base").append("div").classed("div2Buttons",true);
+
+
+  var NewUpload = div2Buttons.append("button").attr("id","NewUpload");
+    NewUpload.text("New Upload");
+    NewUpload.on("click",function(d){ choixUpldFichierCsvOuPas(); });
+
+  var help0 = div2Buttons.append("button").attr("id","help0");
+    help0.text("Help");
+    //help0.on("click",function() { aideUser(); });
+
+
+  visuMatAdj(obj);
+
+};
+
+
+
+
+
+
+
+
+// Circles function
+// Useless 
+function propagEvent(){
+
+  console.log(document);
+  console.log(window);
+
+
+  var dessein = document.getElementsByClassName("dessein");
+  var dessein2 = document.querySelectorAll("div.dessein");
+  console.log(dessein);
+  console.log(dessein2);
+
+  //dessein.getElementsByClassName("cellCircles");
+
+  var dessein3 = d3.select("div.dessein");
+  var svg = d3.select("svg");
+
+  console.log(dessein3);
+  console.log(svg);
+  console.log(svg[0]);
+  console.log(svg[0][0]);
+  console.log(svg[0][0].childNodes);
+  var lol = svg[0][0].childNodes;
+  console.log(lol);
+  console.log(lol.item(5));
+  console.log(lol[5]);
+
+
+  var svgNodes = svg[0][0].getElementsByClassName("cellCircles");
+  console.log(svgNodes);
+  console.log(svgNodes[0]);
+  console.log(svgNodes.item(5));
+
+
+  var cells = document.getElementsByClassName('cellCircles');
+  var cells2 = document.querySelectorAll("g.cellCircles");
+  var socle = document.getElementById('circles');
+  //console.log(cells);
+  //console.log(cells2);
+
+  //console.log(cells.item(5));
+  //console.log(typeof cells);
+  //console.log(cells);
+  //console.log(cells.item(5));
+  //console.log(socle);
+
+  var cells3 = d3.selectAll("g.cellCircles");
+  //console.log(cells3);
+
+  //var lala = d3.select(".circles");
+  //console.log(lala);
+
+
+  //for (var i in cells) { console.log(i);}
+
+  //var cell1 = cells[0];
+  //console.log(cells.item);
+
+
+}

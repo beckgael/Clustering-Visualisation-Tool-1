@@ -21,6 +21,8 @@ div.Upload1 {
 	margin-right: 10px;
 
 	font-weight: bold;
+
+	text-overflow:ellipsis;
 }
 
 
@@ -31,6 +33,8 @@ div.Upload2 {
 	float: left;
 
 	font-weight: bold;
+
+	text-overflow:ellipsis;
 }
 
 input.input0 {

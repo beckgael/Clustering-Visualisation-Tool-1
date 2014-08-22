@@ -1,3 +1,5 @@
+// Gèrer le début de session de l'outil
+// Propose à l'utilisateur d'uploader des fichiers "classiques" ou de matrice d'adjacence
 
 function choixUpldFichierCsvOuPas() {
 
@@ -70,6 +72,7 @@ function choixUpldFichierCsvOuPas() {
 
 
 
+//Choix 1, upload fichier 1er et 2nd pour visu classique
 
 function upldFichierCsv() {
 
@@ -151,6 +154,7 @@ On travaille ici sur des fonctions asynchrones
 
 
 
+// On passe au second niveau de l'outil avec la possibilité de choisir les différentes visualisations "classiques"
 
 function choixVisu(data) {
 
@@ -180,7 +184,7 @@ var NewUpload = div2Buttons.append("button").attr("id","NewUpload");
 
 var help0 = div2Buttons.append("button").attr("id","help0");
 	help0.text("Help");
-	help0.on("click",function() { aideUser(); });
+	//help0.on("click",function() { aideUser(); });
 
 var divChoixDeroulant = boutons2Base.append("div").classed("divChoixDeroulant",true)
 
@@ -198,6 +202,8 @@ var optGroup0 = ChoixDeroulant.append("optgroup").attr("label","Veuillez selecti
 									.text("Proportions");
 	optGroup0.append("option").classed("opt0","true")
 									.text("Histo");
+	optGroup0.append("option").classed("opt0","true")
+									.text("Parralel Coordinate");
 
 var choice00 = document.getElementById("choice0");
 
@@ -222,6 +228,9 @@ var choice00 = document.getElementById("choice0");
 						break;
 
 			case 4 :  histo1(dataEncT[0]);
+						break;
+
+			case 5 :  parralelCoord(dataEncT[0]);
 						break;
 
 			default : break;
@@ -251,6 +260,9 @@ var choice00 = document.getElementById("choice0");
 
 			case 4 :  histo1(dataEncT[0]);
 						break;
+
+			case 5 :  parralelCoord(dataEncT[0]);
+						break;
 						
 			default : break;
 		}
@@ -259,88 +271,92 @@ var choice00 = document.getElementById("choice0");
 
 
 
-function upldMatAdj() {
+// Gère l'upload des matrices d'adj
 
+function uploadFichierMatAtdj() {
+
+	//Grand nettoyage
 	commeNeuf();
-
-
 	d3.select("div.boutons2Base").remove();
 	d3.select("div.boutonsSup").remove();
 	d3.select("div.buttonsArea").append("div").classed("boutons2Base",true);
 	d3.select("div.buttonsArea").append("div").classed("boutonsSup",true);
 
 
+	// On prépare la zone d'upload
 	var UpldButtonZ = d3.select("div.boutons2Base").append("div")
 													.classed("UplArea",true);
 
-	var divUp1 = UpldButtonZ;
+	var divUp1 = UpldButtonZ.append("div")
+								.style("height",45+"%")
+								.style("width",45+"%")
+								.classed("Upload1",true);
 
-	divUp1.text("Fichier Matrice Adjacence");
+	var divUp2 = UpldButtonZ.append("div")
+								.style("height",45+"%")
+								.style("width",45+"%")
+								.classed("Upload1",true);
+
+
+	divUp1.text("Fichier principal");
 	divUp1.append("input").attr("id","myfile")
 							.classed("input0",true)
-							.attr("type","file")	// on indique qu'on cherche un fichier
-							.attr("accept","text/json");
+							.attr("type","file");	// on indique qu'on cherche un fichier
+							//.attr("accept","text/csv");
 
+	divUp2.text("Fichier secondaire");
+	divUp2.append("input").attr("id","myfile2")
+							.classed("input0",true)
+							.attr("type","file")	// on indique qu'on cherche un fichier
+							.attr("accept","text/csv");
 
 	UpldButtonZ.append("button")
-					.attr("id","validF")
-					.text("Valider la selection")
+						.attr("id","validF")
+						.text("Valider la selection")
+
 
 	var bouttonF = document.querySelector('#validF');
 	var boutton1 = document.querySelector('#myfile');
+	var boutton2 = document.querySelector('#myfile2');
 
 	var dataF = [];
 
 
-	/*
-Idéalement il faut gérer l'exécution de la function finale sur les donnés dl/traitées
-en function de la vitesse d'upload, cependant on peux penser qu'il s'agit de fichier csv
-de taille < 1mo et donc "immédiatement" upl et donc functionFinale est exéc par B2
-	*/
 	bouttonF.onclick = function(e) {
 
 
-		var reader = new FileReader();
-		reader.onload = function() { 
+			var reader = new FileReader();
+			reader.onload = function() { 
 
-			//traitDataJson1(reader.result);
-			dataF.push(reader.result);	// on insérer dans dataF le tab des valeurs du fichier upldé
-			//console.log(dataF);
-			matriAdjVisu(dataF);
-		 };
-		reader.readAsText(boutton1.files[0]);
+						//traitDataJson1(reader.result);
+						dataF.push(reader.result);	// on insérer dans dataF le tab des valeurs du fichier upldé
+						//console.log(dataF);
+						
+						
+				 };
+			reader.readAsText(boutton1.files[0]);
+			var reader2 = new FileReader();
+			reader2.onload = function() { 
 
-	};
+						//traitDataJson1(reader.result);
+						dataF.push(reader2.result);	// on insérer dans dataF le tab des valeurs du fichier upldé
+						//console.log(dataF);
+						
+						var jsonTab = arrayToJSON(parseMatAdjToJSON(dataF));
+
+						var rez5 = traitDataCsv(dataF[1]);
+						//console.log(rez5);
+						plotForceLayout(jsonTab,rez5);
+
+				 };
+			reader2.readAsText(boutton2.files[0]);
+									};
+
+
+
+
+
 
 }
 
-
-
-function matriAdjVisu(data) {
-
-	//console.log(data);
-	var obj = $.parseJSON(data);	// on parse le fichier JSON en array JS à l'aide de Jquery
-	console.log(obj);
-
-	commeNeuf();
-	d3.select("div.boutons2Base").remove();
-	d3.select("div.boutonsSup").remove();
-	d3.select("div.buttonsArea").append("div").classed("boutons2Base",true);
-	d3.select("div.buttonsArea").append("div").classed("boutonsSup",true);
-
-	var div2Buttons = d3.select("div.boutons2Base").append("div").classed("div2Buttons",true);
-
-
-	var NewUpload = div2Buttons.append("button").attr("id","NewUpload");
-		NewUpload.text("New Upload");
-		NewUpload.on("click",function(d){ choixUpldFichierCsvOuPas(); });
-
-	var help0 = div2Buttons.append("button").attr("id","help0");
-		help0.text("Help");
-		help0.on("click",function() { aideUser(); });
-
-
-	visuMatAdj(obj);
-
-};
 

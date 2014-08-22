@@ -12,101 +12,6 @@
 
 
 
-function uploadFichierMatAtdj() {
-
-	//Grand nettoyage
-	commeNeuf();
-	d3.select("div.boutons2Base").remove();
-	d3.select("div.boutonsSup").remove();
-	d3.select("div.buttonsArea").append("div").classed("boutons2Base",true);
-	d3.select("div.buttonsArea").append("div").classed("boutonsSup",true);
-
-
-	// On prépare la zone d'upload
-	var UpldButtonZ = d3.select("div.boutons2Base").append("div")
-													.classed("UplArea",true);
-
-	var divUp1 = UpldButtonZ.append("div")
-								.style("height",45+"%")
-								.style("width",45+"%")
-								.classed("Upload1",true);
-
-	var divUp2 = UpldButtonZ.append("div")
-								.style("height",45+"%")
-								.style("width",45+"%")
-								.classed("Upload1",true);
-
-
-	divUp1.text("Fichier principal");
-	divUp1.append("input").attr("id","myfile")
-							.classed("input0",true)
-							.attr("type","file");	// on indique qu'on cherche un fichier
-							//.attr("accept","text/csv");
-
-	divUp2.text("Fichier secondaire");
-	divUp2.append("input").attr("id","myfile2")
-							.classed("input0",true)
-							.attr("type","file")	// on indique qu'on cherche un fichier
-							.attr("accept","text/csv");
-
-	UpldButtonZ.append("button")
-						.attr("id","validF")
-						.text("Valider la selection")
-
-
-	var bouttonF = document.querySelector('#validF');
-	var boutton1 = document.querySelector('#myfile');
-	var boutton2 = document.querySelector('#myfile2');
-
-	var dataF = [];
-
-
-	bouttonF.onclick = function(e) {
-
-
-			var reader = new FileReader();
-			reader.onload = function() { 
-
-						//traitDataJson1(reader.result);
-						dataF.push(reader.result);	// on insérer dans dataF le tab des valeurs du fichier upldé
-						//console.log(dataF);
-						
-						
-				 };
-			reader.readAsText(boutton1.files[0]);
-			var reader2 = new FileReader();
-			reader2.onload = function() { 
-
-						//traitDataJson1(reader.result);
-						dataF.push(reader2.result);	// on insérer dans dataF le tab des valeurs du fichier upldé
-						//console.log(dataF);
-						
-						var jsonTab = arrayToJSON(parseMatAdjToJSON(dataF));
-
-						var rez5 = traitDataCsv(dataF[1]);
-						//console.log(rez5);
-						plotForceLayout(jsonTab,rez5);
-
-				 };
-			reader2.readAsText(boutton2.files[0]);
-									};
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
 // Transforme une matrice d'adjacence en tableau JS
 function parseMatAdjToJSON (data1) {
 
@@ -181,9 +86,13 @@ function arrayToJSON(tab1) {
 
 
 
-function aideUserNeur() {
+// Aide utilisateur
+function helpUserNeur() {
 	d3.select("div.legendG").text("Cliquez sur un neuronne afin d'obtenir ses informations.	\nModifier les paramètre du graphe à l'aide des entrées à votre gauche (cf D3 doc).	\nChoissisez quel attribut visualiser à l'aide du menu déroulant. \nVous pouvez déplacer les neuronnes par glisser/déposer, les relacher en double cliquant dessus.");
 }
+
+
+// Début du tracer du force layout
 
 function plotForceLayout(nodesLinksData2,dataComp) {
 
@@ -201,7 +110,7 @@ function plotForceLayout(nodesLinksData2,dataComp) {
 
 	var Help0 = d3.select("div.boutons2Base").append("button").attr("id","help0");
 	Help0.text("Help");
-	Help0.on("click",function(d){ aideUserNeur(); });
+	Help0.on("click",function(d){ helpUserNeur(); });
 
 	var tabVall = objToAtt(dataComp);
 
@@ -209,6 +118,8 @@ function plotForceLayout(nodesLinksData2,dataComp) {
 
 
 }
+
+// 2nd part du force layout
 
 function plotForceLayoutInside(data2,numAtt,dataComp1,gravity0,friction0,chargeParam0,linkDistance0,rayMaxNeur0) {
 
@@ -355,14 +266,6 @@ function plotForceLayoutInside(data2,numAtt,dataComp1,gravity0,friction0,chargeP
 	document.querySelector("#ValidChoiceForceLay").addEventListener("click",function(){ ModifParamForceLay(tabValBase,tabValParamForceLay); });
 
 
-
-
-
-
-
-
-
-
   force
       .nodes(data2.nodes)
       .links(data2.links)
@@ -412,6 +315,8 @@ function plotForceLayoutInside(data2,numAtt,dataComp1,gravity0,friction0,chargeP
 };
 
 
+
+//	Permet de modifier les paramètre du force layout
 
 function ModifParamForceLay(tabValBase,tabValParamForceLay) {
 
