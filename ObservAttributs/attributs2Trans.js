@@ -1,25 +1,17 @@
-function propData3(dataUp){
-
-			//On efface pour mieux redessiner =)
-   			 commeNeuf();
-
-
-var boutons12 = d3.select("div.legendG2")
-						.append("div")
-						.classed("boutons12",true);
-
-var boutons2 = d3.select("div.legendG2")
-						.append("div")
-						.classed("boutons2",true)
-						.attr("id","b2");
-
-		tracerProp3(dataUp);
-
-};
-
-
 function tracerProp3(dataUp2){
 
+	//On efface pour mieux redessiner =)
+	commeNeuf();
+
+
+	var boutons12 = d3.select("div.legendG2")
+							.append("div")
+							.classed("boutons12",true);
+
+	var boutons2 = d3.select("div.legendG2")
+							.append("div")
+							.classed("boutons2",true)
+							.attr("id","b2");
 	
 	var to1,to2;
 
@@ -176,6 +168,12 @@ function tracerProp3(dataUp2){
 									//console.log(tabIndice);
 									//console.log(tabIndice[3]);
 									//console.log(tabArcs);
+
+
+	d3.select("#help0").remove();
+	d3.select("div.div2Buttons").append("button").attr("id","help0").text("Help");
+
+	document.querySelector("#help0").addEventListener("click",function(){helpUserProp();});
 
 
 

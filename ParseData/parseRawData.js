@@ -156,7 +156,7 @@ function traitDataCsv(data) {
       //console.log(tabAtt[j]);
       //console.log(typeof(tabAtt[j]));
       varName = tabAtt[j];
-      obj[varName] = +tab2[i][j]; //coerce values
+      obj[varName] = scientToDecimal(tab2[i][j]); //coerce values
     }
     tab3.push(obj);
   }

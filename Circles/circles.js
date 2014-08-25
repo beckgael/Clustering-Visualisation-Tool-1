@@ -298,6 +298,9 @@ else if (toto != null) {
 	});
 
 
+//Help button
+	d3.select("#help0").remove();
+	d3.select("div.div2Buttons").append("button").attr("id","help0").text("Help");
 	document.querySelector("#help0").addEventListener("click",function(){helpUserCircles();});
 	
 
@@ -422,19 +425,3 @@ function legendCircle(nbAtt){
 
 
 
-
-function helpUserCircles() {
-
-	d3.select("div.HelpCircles").remove();
-
-	d3.select("div.legendG").append("div")
-							.classed("HelpCircles",true)
-							.text("Aide pour l'utilisation de la visualisations sous forme de cercles.\n"
-									+"Double-cliquez sur une cellule pour des informations complémentaires. "
-									+"Vous pouvez également choisir la disposition des cellules "
-									+"avec le champs à votre gauche en entrant un valeur de remplissage par ligne ou colonne ou encore "
-									+"visualiser les attributs de manière indépendante à l'aide du menu déroulant."
-								);
-
-
-}

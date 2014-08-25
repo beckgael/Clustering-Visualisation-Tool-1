@@ -82,11 +82,11 @@ function tracerCellHisto(dimY1,rectTaillUser,dataUp2) {
 
 	//console.log(ObjF);
 
-	for (var i = 0; i < ObjF["taille"].length; i++) {
-		if (ObjF["taille"][i] == 0) {}
-		else { var obj = { "index" : i , "taille" : ObjF["taille"][i] }
+	for (var i = 0; i < ObjF["card"].length; i++) {
+		if (ObjF["card"][i] == 0) {}
+		else { var obj = { "index" : i , "card" : ObjF["card"][i] }
 			tabIndTaill.push(obj);
-			tabTaill.push(ObjF["taille"][i]); }
+			tabTaill.push(ObjF["card"][i]); }
 	};
 
 	var indPostabTaill = 0;	// indice permettant le repérage des prototypes adéquat lors du traçage par d3
@@ -164,6 +164,7 @@ var cell1 = gg3.append("rect")
 		        .attr("x", rectPadding)
 		        .attr("y", rectPadding)
 		        .attr("height",function(d,i){
+		        try{
 		        	//console.log(tabIndTaill[indPostabTaill]["index"]);
 		        	if (d && i == tabIndTaill[indPostabTaill3]["index"]) {
 		        		//console.log(indPostabTaill3);
@@ -172,13 +173,18 @@ var cell1 = gg3.append("rect")
 		        		return ((((rezScale[indPostabTaill3-1]))/(100))*rectTaill);
 		        	}
 		        	else { return 0; }
+		        	}
+		        catch(e) {}
 		        })
 		        .attr("width",25)
 				.attr("fill", function(d,i){ 
+				try{
 					if (d && i == tabIndTaill[indPostabTaill]["index"]) {
 						indPostabTaill++;
 						return scale1(d);}
 					else { return "white"}
+					}
+				catch(e) {}
 										});
 				//.on("dblclick",function(d,i){foncInfo5(ObjF,i);});	//useless si même fct sur le deuxieme rect qui est "au-dessus"
 

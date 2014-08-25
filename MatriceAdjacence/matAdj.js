@@ -63,7 +63,7 @@ function parseMatAdjToJSON (data1) {
 
 
 // transforme les tab JS en JSON compris par d3.force nodes
-function arrayToJSON(tab1) {
+function arrayToJSONforceLayout(tab1) {
 
 	//console.log(tab1);
 	var nodesLinksData = {"nodes":[],"links":[]};

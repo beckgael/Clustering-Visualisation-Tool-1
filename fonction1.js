@@ -46,44 +46,7 @@ function tabScaleDeg(tab2,nbAttr,couleurmax,index1) {
 };
 
 
-// selectionnne les attribut de types VN
-function elagage(tab3){
-  var reZ = new Array();
-  for (var i = 0; i < tab3[0].length; i++) {
-    if (typeof tab3[0][i] === "number") {}
-    else reZ.push(i);
-  };
-  return reZ;
-}
 
-
-//USELESS
-function placeCel(index1){
-  var index2 = index1%10; 
-  var index3 = Math.floor(index1/10);
-  for (var i = 0; i < 10; i++) {
-    for (var u = 0; u < 10; u++) {
-      var str = index2+""+index3;
-      var str2 = parseInt(str,10);
-      console.log(str2);
-
-      if (i == index3 && u == index2) { return str2;};
-    };
-  };
-};
-
-
-// USELESS
-function recupClesObj(obj){
-
-  var rez = [];
- for (var cle in obj) {
-  rez.push(cle)
- }
-
- return rez;
-
-};
 
   //  Supprime les zone de dessein et de légend et les remets en place (vierge)
 function commeNeuf() {
@@ -222,7 +185,7 @@ function scientToDecimal(str1) {
 
 function parseDataMathlab(data1) {
 
-  var data = data1[0],
+  var data = data1,
     dataRez = [],
     indicAttLign;
   //console.log(data);
@@ -232,9 +195,10 @@ function parseDataMathlab(data1) {
   indicAttLign = data.indexOf("\n");
   var strAtt1 = data;
     strAtt1 = strAtt1.slice(0,indicAttLign);
-    //console.log(strAtt1);
+    //console.log("stratt1 = ",strAtt1);
     data = data.slice(indicAttLign+1,data.length);
     //console.log(data);
+
 
 
 
@@ -251,7 +215,7 @@ function parseDataMathlab(data1) {
   var indexLastLigne = data.lastIndexOf("\n"),
     cpdata = data;
     cpdata = cpdata.slice(indexLastLigne+1,cpdata.length)
-    //console.log(cpdata);
+    //console.log("cpdata = ",cpdata);
 
 
 
@@ -271,13 +235,13 @@ function parseDataMathlab(data1) {
           dataRez[i] = data.split(" ",nbAtt);
           // on s'occupe des NbAtt-1 premiers attributs car il ne finise pas par "\n"
           for (var j = 0; j < nbAtt-1; j++) {
-            dataRez[i][j] = stringScientToDecimal(dataRez[i][j]);
+            dataRez[i][j] = scientToDecimal(dataRez[i][j]);
           };
 
           //on s'occupe du dernier attribut en excluant le "\n" de fin de ligne
           var indexLigne = dataRez[i][nbAtt-1].indexOf("\n");
           dataRez[i][nbAtt-1] = dataRez[i][nbAtt-1].slice(0,indexLigne);
-          dataRez[i][nbAtt-1] = stringScientToDecimal(dataRez[i][nbAtt-1]);
+          dataRez[i][nbAtt-1] = scientToDecimal(dataRez[i][nbAtt-1]);
 
           var indexLigne2 = data.indexOf("\n");
           indexLigne2++;
@@ -299,7 +263,18 @@ function parseDataMathlab(data1) {
 
     var dataRez2 = [attNames,dataRez]
     console.log(dataRez2);
-    return dataRez2;
+
+    var dataRezF = [];
+    for (var i = 0; i < dataRez2[1].length; i++) {
+      var obj1 = {};
+      for (var j = 0; j < dataRez2[0].length; j++) {
+        obj1[dataRez2[0][j]] = dataRez2[1][i][j];
+      };
+      dataRezF.push(obj1);
+    };
+    
+    console.log(dataRezF);
+    return dataRezF;
 }
 
 

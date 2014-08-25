@@ -56,12 +56,12 @@ function tracerCell(dimY1,rectTaillUser,dataUp2,boolLign) {
 	var tabIndTaill = [];
 	var tabTaill = [];
 
-	console.log(ObjF);
-	for (var i = 0; i < ObjF["taille"].length; i++) {
-		if (ObjF["taille"][i] == 0) {}
-		else { var obj = { "index" : i , "taille" : ObjF["taille"][i] }
+	//console.log(ObjF);
+	for (var i = 0; i < ObjF["card"].length; i++) {
+		if (ObjF["card"][i] == 0) {}
+		else { var obj = { "index" : i , "card" : ObjF["card"][i] }
 			tabIndTaill.push(obj);
-			tabTaill.push(ObjF["taille"][i]); }
+			tabTaill.push(ObjF["card"][i]); }
 	};
 
 	var indPostabTaill = 0;	// indice permettant le repérage des prototypes adéquat lors du traçage par d3
@@ -129,7 +129,7 @@ var gg3 = svg3.selectAll("g.svgG")
 			    	return inversLigneColon(boolLign,posId,rectTaill,cellMargin); });
 
 
-console.log(tabIndTaill);
+//console.log(tabIndTaill);
 
 var cell1 = gg3.append("rect")
 				.classed("cellRect",true)
@@ -144,7 +144,7 @@ var cell1 = gg3.append("rect")
 		        	}
 		        	else { return 0; }
 		        	}
-		        catch(e) {console.log(e);}
+		        catch(e) { /*console.log(e);*/ }
 		        })
 		        .attr("width",function(d,i){
 		        try{
@@ -191,6 +191,11 @@ var cell2 = gg3.append("rect")
 	indPostabTaill3 = 0;	// on réinitialise les indices pour traçer les nouveaux attributs
 	};
 
+
+	//Bontons d'aides
+d3.select("#help0").remove();
+d3.select("div.div2Buttons").append("button").attr("id","help0").text("Help");
+document.querySelector("#help0").addEventListener("click",function(){helpUserCells();});
 
 
 	//Boutons de selections pour observer un attribut unique
@@ -416,7 +421,7 @@ function appendChoice(attNames,dataF,dataF2,confCell){
 
 	modifArea.append("input").attr("id","cellsSize")
 							.attr("type","text")
-							.attr("value","Entrez la taille de cellule désirée 1<x<50");
+							.attr("value","Entrez la card de cellule désirée 1<x<50");
 
 	modifArea.append("button")
 				.attr("id","ValidChoice")
@@ -654,3 +659,5 @@ function propagEventDeg(){
 
 
 };
+
+

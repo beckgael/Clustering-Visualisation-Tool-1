@@ -26,16 +26,19 @@ function choixUpldFichierCsvOuPas() {
 		optGroup0.append("option")
 					.classed("opt0","true")
 					.text("Algorithme SOM with csv");
+
 		optGroup0.append("option")
 					.classed("opt0","true")
-					.text("Algorithme SOM with txt");
+					.text("Algorithme SOM with matlab file");
+		
 		optGroup0.append("option")
 					.classed("opt0","true")
 					.text("Matrice d'adjacences with csv");
+/*
 		optGroup0.append("option")
 					.classed("opt0","true")
 					.text("Matrice d'adjacences with txt");
-
+*/
 
 	// On selectionne le selecteur pour trouver la valeur qui nous interesse
 	var choice00 = document.getElementById("choice0");
@@ -53,14 +56,13 @@ function choixUpldFichierCsvOuPas() {
 			case 0 : upldFichierCsv();
 						break;
 
-			case 1 : console.log("txt");
+			case 1 : upldFichierMatlab();
 						break;
 
 			case 2 : uploadFichierMatAtdj();
 						break;
-
-			case 3 : console.log("txt2");
-						break;
+			//case 3 : console.log("txt2");
+			//			break;
 
 			default : break;
 		}
@@ -202,8 +204,9 @@ var optGroup0 = ChoixDeroulant.append("optgroup").attr("label","Veuillez selecti
 									.text("Proportions");
 	optGroup0.append("option").classed("opt0","true")
 									.text("Histo");
-	optGroup0.append("option").classed("opt0","true")
-									.text("Parralel Coordinate");
+									
+//	optGroup0.append("option").classed("opt0","true")
+//									.text("Parralel Coordinate");
 
 var choice00 = document.getElementById("choice0");
 
@@ -224,7 +227,7 @@ var choice00 = document.getElementById("choice0");
 			case 2 : degColHisto(10,25,dataEncT[0]);
 						break;
 
-			case 3 :  propData3(dataEncT[0]);
+			case 3 :  tracerProp3(dataEncT[0]);
 						break;
 
 			case 4 :  histo1(dataEncT[0]);
@@ -255,7 +258,7 @@ var choice00 = document.getElementById("choice0");
 			case 2 : degColHisto(10,25,dataEncT[0]);
 						break;
 
-			case 3 :  propData3(dataEncT[0]);
+			case 3 :  tracerProp3(dataEncT[0]);
 						break;
 
 			case 4 :  histo1(dataEncT[0]);
@@ -342,7 +345,7 @@ function uploadFichierMatAtdj() {
 						dataF.push(reader2.result);	// on insérer dans dataF le tab des valeurs du fichier upldé
 						//console.log(dataF);
 						
-						var jsonTab = arrayToJSON(parseMatAdjToJSON(dataF));
+						var jsonTab = arrayToJSONforceLayout(parseMatAdjToJSON(dataF));
 
 						var rez5 = traitDataCsv(dataF[1]);
 						//console.log(rez5);
@@ -360,3 +363,83 @@ function uploadFichierMatAtdj() {
 }
 
 
+
+function upldFichierMatlab() {
+
+	// on nétoie les espaces d'affichages
+	commeNeuf();
+	d3.select("div.boutons2Base").remove();
+	d3.select("div.boutonsSup").remove();
+	d3.select("div.buttonsArea").append("div").classed("boutons2Base",true);
+	d3.select("div.buttonsArea").append("div").classed("boutonsSup",true);
+
+
+	// On prépare la zone d'upload
+	var UpldButtonZ = d3.select("div.boutons2Base").append("div")
+													.classed("UplArea",true);
+	//Zone d'upload 1
+	var divUp1 = UpldButtonZ.append("div").classed("Upload1",true);
+	divUp1.text("Fichier principal");
+	divUp1.append("input").attr("id","myfile")
+							.classed("input0",true)
+							.attr("type","file")	// on indique qu'on cherche un fichier
+							.attr("accept","text/csv");
+							//Mettre text informatif a coté
+							//.text("Fichier Principal");
+	//Zone d'upload 2
+	var divUp2 = UpldButtonZ.append("div").classed("Upload2",true);
+	divUp2.text("Fichier secondaire");
+	divUp2.append("input").attr("id","myfile2")
+							.classed("input0",true)
+							.attr("type","file")	// on indique qu'on cherche un fichier
+							.attr("accept","text/csv")
+							;							
+							//Mettre text informatif a coté
+							//.text("Fichier Complémentaires");
+
+
+	//Bouton de validation des selections
+	UpldButtonZ.append("button")
+						.attr("id","validF")
+						.text("Valider la selection")
+
+	// on selectionnner les boutons pour pouvoir y chercher les fichiers
+	var bouttonF = document.querySelector('#validF');
+	var boutton1 = document.querySelector('#myfile');
+	var boutton2 = document.querySelector('#myfile2');
+
+	var dataF = [];
+
+
+	/*
+Idéalement il faut gérer l'exécution de la function finale sur les donnés dl/traitées
+en fonction de la vitesse d'upload, cependant on peux penser qu'il s'agit de fichier csv
+de taille < 1mo et donc "immédiatement" upl et donc functionFinale est exéc par Bouton 2
+	
+On travaille ici sur des fonctions asynchrones
+	*/
+	bouttonF.onclick = function(e) {
+		//bouton 1
+		var reader = new FileReader();
+		reader.onload = function() { 
+			//traitDataCsvJson1(reader.result);	
+			dataF.push(parseDataMathlab(reader.result));	// on insérer dans dataF le tab des valeurs du fichier upldé
+			//console.log(dataF);
+		 };
+		reader.readAsText(boutton1.files[0]);
+		//bouton 2
+		var reader2 = new FileReader();
+		reader2.onload = function() { 
+			dataF.push(parseDataMathlab(reader2.result));	// on insérer dans dataF le tab des valeurs du fichier upldé
+			//console.log(dataF);
+			choixVisu(dataF);
+		 };
+		reader2.readAsText(boutton2.files[0]);
+
+								};
+
+
+
+
+
+}

@@ -449,3 +449,43 @@ function propagEvent(){
 
 
 }
+
+
+//USELESS
+function placeCel(index1){
+  var index2 = index1%10; 
+  var index3 = Math.floor(index1/10);
+  for (var i = 0; i < 10; i++) {
+    for (var u = 0; u < 10; u++) {
+      var str = index2+""+index3;
+      var str2 = parseInt(str,10);
+      console.log(str2);
+
+      if (i == index3 && u == index2) { return str2;};
+    };
+  };
+};
+
+
+// USELESS
+function recupClesObj(obj){
+
+  var rez = [];
+ for (var cle in obj) {
+  rez.push(cle)
+ }
+
+ return rez;
+
+};
+
+//Useless
+// selectionnne les attribut de types VN
+function elagage(tab3){
+  var reZ = new Array();
+  for (var i = 0; i < tab3[0].length; i++) {
+    if (typeof tab3[0][i] === "number") {}
+    else reZ.push(i);
+  };
+  return reZ;
+}
