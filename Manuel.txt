@@ -5,6 +5,9 @@
 Welcome to this manuel which i hope it will help you to correctly use this visualisation tool.
 
 
+In order to allow you to use correctly this visualisation tool, i let you some exemple's files in the git repository. So see them and adapt your file in consequence.
+
+
 FirstPage
 *********
 

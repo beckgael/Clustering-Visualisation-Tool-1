@@ -348,7 +348,7 @@ function foncInfoCircles(datas,index1) {
 	};
 
 	var valcalc = moyInfo5(ObjF);
-	barchartInfo5(valcalc,ObjF,index1);
+	barchartInfo(valcalc,ObjF,index1);
 
 };
 

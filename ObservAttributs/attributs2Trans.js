@@ -207,14 +207,14 @@ function foncInfo5bis(data,datas,index1) {
 	};
 
 	var valcalc = moyInfo5(datas);
-	barchartInfo5bis(valcalc,datas,index1);
+	barchartInfobis(valcalc,datas,index1);
 
 };
 
 
 
 
-function barchartInfo5bis(dataGen,obj1,index5){
+function barchartInfobis(dataGen,obj1,index5){
 	 
 	var attrNames3 = Object.keys(obj1);
 

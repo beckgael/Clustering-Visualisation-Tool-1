@@ -230,7 +230,7 @@ function foncInfo5(datas,index1) {
 	};
 
 	var valcalc = moyInfo5(datas);
-	barchartInfo5(valcalc,datas,index1);
+	barchartInfo(valcalc,datas,index1);
 
 };
 
@@ -262,7 +262,7 @@ function moyInfo5(data2) {
 }
 
 
-function barchartInfo5(dataGen,obj1,index5){
+function barchartInfo(dataGen,obj1,index5){
 	 
 	var attrNames3 = Object.keys(obj1);
 
@@ -271,9 +271,9 @@ function barchartInfo5(dataGen,obj1,index5){
 
 	var lgSvg = Object.size(obj1);
 
-	console.log(dataGen);
-	console.log(obj1);
-	console.log(lgSvg);
+	//console.log(dataGen);
+	//console.log(obj1);
+	//console.log(lgSvg);
 
 	var svg1 = graph.append("svg")
 						.classed("barchart",true)

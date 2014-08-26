@@ -34,11 +34,11 @@ function choixUpldFichierCsvOuPas() {
 		optGroup0.append("option")
 					.classed("opt0","true")
 					.text("Matrice d'adjacences with csv");
-/*
+
 		optGroup0.append("option")
 					.classed("opt0","true")
 					.text("Matrice d'adjacences with txt");
-*/
+
 
 	// On selectionne le selecteur pour trouver la valeur qui nous interesse
 	var choice00 = document.getElementById("choice0");
@@ -61,8 +61,9 @@ function choixUpldFichierCsvOuPas() {
 
 			case 2 : uploadFichierMatAtdj();
 						break;
-			//case 3 : console.log("txt2");
-			//			break;
+
+			case 3 : uploadFichierMatAtdjMatlab();
+						break;
 
 			default : break;
 		}
@@ -274,8 +275,7 @@ var choice00 = document.getElementById("choice0");
 
 
 
-// Gère l'upload des matrices d'adj
-
+// Gère l'upload des matrices d'adj avec csv
 function uploadFichierMatAtdj() {
 
 	//Grand nettoyage
@@ -362,6 +362,93 @@ function uploadFichierMatAtdj() {
 
 }
 
+
+// Gère l'upload des matrices d'adj avec csv
+function uploadFichierMatAtdjMatlab() {
+
+	//Grand nettoyage
+	commeNeuf();
+	d3.select("div.boutons2Base").remove();
+	d3.select("div.boutonsSup").remove();
+	d3.select("div.buttonsArea").append("div").classed("boutons2Base",true);
+	d3.select("div.buttonsArea").append("div").classed("boutonsSup",true);
+
+
+	// On prépare la zone d'upload
+	var UpldButtonZ = d3.select("div.boutons2Base").append("div")
+													.classed("UplArea",true);
+
+	var divUp1 = UpldButtonZ.append("div")
+								.style("height",45+"%")
+								.style("width",45+"%")
+								.classed("Upload1",true);
+
+	var divUp2 = UpldButtonZ.append("div")
+								.style("height",45+"%")
+								.style("width",45+"%")
+								.classed("Upload1",true);
+
+
+	divUp1.text("Fichier principal");
+	divUp1.append("input").attr("id","myfile")
+							.classed("input0",true)
+							.attr("type","file");	// on indique qu'on cherche un fichier
+							//.attr("accept","text/csv");
+
+	divUp2.text("Fichier secondaire");
+	divUp2.append("input").attr("id","myfile2")
+							.classed("input0",true)
+							.attr("type","file")	// on indique qu'on cherche un fichier
+							.attr("accept","text/csv");
+
+	UpldButtonZ.append("button")
+						.attr("id","validF")
+						.text("Valider la selection")
+
+
+	var bouttonF = document.querySelector('#validF');
+	var boutton1 = document.querySelector('#myfile');
+	var boutton2 = document.querySelector('#myfile2');
+
+	var dataF = [];
+
+
+	bouttonF.onclick = function(e) {
+
+
+			var reader = new FileReader();
+			reader.onload = function() { 
+
+						//traitDataJson1(reader.result);
+						dataF.push(reader.result);	// on insérer dans dataF le tab des valeurs du fichier upldé
+						//console.log(dataF);
+						
+						
+				 };
+			reader.readAsText(boutton1.files[0]);
+			var reader2 = new FileReader();
+			reader2.onload = function() { 
+
+						//traitDataJson1(reader.result);
+						dataF.push(reader2.result);	// on insérer dans dataF le tab des valeurs du fichier upldé
+						//console.log(dataF);
+						
+						var jsonTab = arrayToJSONforceLayout(parseMatAdjToJSON(dataF));
+
+						var rez5 = parseDataMathlab(dataF[1]);
+						//console.log(rez5);
+						plotForceLayout(jsonTab,rez5);
+
+				 };
+			reader2.readAsText(boutton2.files[0]);
+									};
+
+
+
+
+
+
+}
 
 
 function upldFichierMatlab() {
