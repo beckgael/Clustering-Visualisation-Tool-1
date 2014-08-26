@@ -10,6 +10,18 @@ function choixUpldFichierCsvOuPas() {
 	d3.select("div.buttonsArea").append("div").classed("boutons2Base",true);
 	d3.select("div.buttonsArea").append("div").classed("boutonsSup",true);
 
+	//On indique l'emplacement des fichiers d'exemples
+
+	d3.select("div.legendG")
+		.text("You can download files exemples with this link : ");
+
+	d3.select("div.legendG")
+		.append("a")
+		.attr("href","https://github.com/Kybe67/Clustering_Visualization_Tool")
+		.text("Data Exemples\n");
+
+//dessein0.text("Data exemples are available on https://github.com/Kybe67/Clustering_Visualization_Tool")
+
 	
 	//On crée le menu déroulant
 	var divChoixDeroulant = d3.select("div.boutons2Base")
