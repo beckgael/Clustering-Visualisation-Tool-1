@@ -208,15 +208,17 @@ var ChoixDeroulant = divChoixDeroulant.append("select").attr("id","choice0");
 var optGroup0 = ChoixDeroulant.append("optgroup").attr("label","Veuillez selectionner une visualisation");
 
 	optGroup0.append("option").classed("opt0","true")
-									.text("Circles");
+									.text("Circles Chart");
 	optGroup0.append("option").classed("opt0","true")
-									.text("Cells");
+									.text("Cells Chart");
 	optGroup0.append("option").classed("opt0","true")
-									.text("CellsHisto");
+									.text("Cells Bar Chart");
 	optGroup0.append("option").classed("opt0","true")
-									.text("Proportions");
+									.text("Proportions Chart");
 	optGroup0.append("option").classed("opt0","true")
-									.text("Histo");
+									.text("Bar Chart");
+	optGroup0.append("option").classed("opt0","true")
+									.text("ParaCoord");
 									
 //	optGroup0.append("option").classed("opt0","true")
 //									.text("Parralel Coordinate");
@@ -249,6 +251,9 @@ var choice00 = document.getElementById("choice0");
 			case 5 :  parralelCoord(dataEncT[0]);
 						break;
 
+			case 6 : parralelCoord();
+						break;
+
 			default : break;
 		}
 
@@ -279,7 +284,7 @@ var choice00 = document.getElementById("choice0");
 
 			case 5 :  parralelCoord(dataEncT[0]);
 						break;
-						
+
 			default : break;
 		}
 	});

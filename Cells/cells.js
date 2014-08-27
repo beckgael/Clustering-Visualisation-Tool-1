@@ -33,25 +33,33 @@ function tracerCell(dimY1,rectTaillUser,dataUp2,boolLign) {
 	var dimY = dimY1;
 	var dimX = Math.floor((nbElem)/dimY)+1;
 	var cellMargin = 3;
-	var bigCellWidthMarg = 9;
+	var bigCellWidthMarg = 20;
 	var bigCellHeightMarg = 50;
 	var bigCellWidth = (2*cellMargin)+(dimX*rectTaill)+((dimX-1)*(2*cellMargin))+bigCellWidthMarg;
 	var bigCellHeight = (2*cellMargin)+(dimY*rectTaill)+((dimY-1)*(2*cellMargin))+bigCellHeightMarg;
 	var rectPadding =  rectTaill;
 
+
+	if (!boolLign) {
+		var temp = bigCellHeight;
+		bigCellHeight = bigCellWidth;
+		bigCellWidth = temp;
+	};
+
+
+
 	// On regroupe toute ces données dans un obj pour les réutiliser au besoin dans des fonctions
 	var confCell = {};
 	confCell.cellMargin = cellMargin;
-	confCell.rectTaill = rectTaill ; 
-	confCell.dimX = dimX ; 
-	confCell.dimY = dimY ; 
-	confCell.bigCellWidthMarg = bigCellWidthMarg ; 
-	confCell.bigCellHeightMarg = bigCellHeightMarg ; 
-	confCell.bigCellWidth = bigCellWidth ; 
-	confCell.bigCellHeight = bigCellHeight ; 
-	confCell.rectPadding = rectPadding ;
+	confCell.rectTaill = rectTaill; 
+	confCell.dimX = dimX; 
+	confCell.dimY = dimY; 
+	confCell.bigCellWidthMarg = bigCellWidthMarg; 
+	confCell.bigCellHeightMarg = bigCellHeightMarg; 
+	confCell.bigCellWidth = bigCellWidth; 
+	confCell.bigCellHeight = bigCellHeight; 
+	confCell.rectPadding = rectPadding;
 
-	//console.log(confCell);
 
 	var tabIndTaill = [];
 	var tabTaill = [];
@@ -166,7 +174,7 @@ var cell1 = gg3.append("rect")
 		        	}
 		        catch(e) {}
 										});
-				//.on("dblclick",function(d,i){foncInfo5(ObjF,i);});	//useless si même fct sur le deuxieme rect qui est "au-dessus"
+				//.on("dblclick",function(d,i){foncInfo(ObjF,i);});	//useless si même fct sur le deuxieme rect qui est "au-dessus"
 
 
 var cell2 = gg3.append("rect")
@@ -175,7 +183,7 @@ var cell2 = gg3.append("rect")
 		        .attr("y", rectPadding)
 		        .attr("height",rectTaill)
 		        .attr("width",rectTaill)
-				.on("dblclick",function(d,i){foncInfo5(ObjF,i);});
+				.on("dblclick",function(d,i){foncInfo(ObjF,i);});
 
 
 	//Legend attribut
@@ -205,212 +213,10 @@ document.querySelector("#help0").addEventListener("click",function(){helpUserCel
 };
 
 
-function foncInfo5(datas,index1) {
-
-		//	On enlève pour mieux redessiner
-
-	d3.select("div.info1").remove();		// on supp les anciens elem pour éviter qu'ils se cumulent
-	d3.select("div.barGraph").remove();		// on supp les anciens elem pour éviter qu'ils se cumulent
-	//commeNeufLegend();
-
-	var info1 = d3.select("div.legendG2").append("div")
-								.classed("info1",true);
-
-	info1.append("p")
-				.style("text-align","center")
-				.style("font-size","20px")
-					.text(" Valeurs des attributs"); // on fait une marge freestyle
-
-	for (var i in datas) {
-		var text1 = i + " : " + datas[i][index1];
-		info1.append("p")
-					.style("text-align","left")
-					.style("font-size","15px").text(text1);
-
-	};
-
-	var valcalc = moyInfo5(datas);
-	barchartInfo(valcalc,datas,index1);
-
-};
-
-
-function moyInfo5(data2) {
-
-	//console.log(data2);
-
-	var maxVal = [];
-	var minVal = [];
-	var moyVal = [];
-	var medVal = [];
-	var rez = [];
-
-	for (var i in data2) {
-		maxVal.push(d3.max(data2[i]));
-		minVal.push(d3.min(data2[i]));
-		moyVal.push(d3.mean(data2[i]));
-		medVal.push(d3.median(data2[i]));
-	};
-
-	rez.push(maxVal);
-	rez.push(minVal);
-	rez.push(moyVal);
-	rez.push(medVal);
-
-
-	return rez;
-}
-
-
-function barchartInfo(dataGen,obj1,index5){
-	 
-	var attrNames3 = Object.keys(obj1);
-
-	var graph = d3.select("div.legendG2").append("div")
-	 						.classed("barGraph",true);
-
-	var lgSvg = Object.size(obj1);
-
-	//console.log(dataGen);
-	//console.log(obj1);
-	//console.log(lgSvg);
-
-	var svg1 = graph.append("svg")
-						.classed("barchart",true)
-						.attr("height",lgSvg*20 + 150);
-
-	
-	for (var index2 = 0; index2 < Object.size(obj1); index2++) {
-
-		//console.log(index2+"_________");
-	
-	var scale2 = d3.scale.linear().domain([dataGen[1][index2],dataGen[0][index2]]).range([10,300]);
-	//console.log(dataGen[1][index2]);
-	//console.log(obj1[attrNames3[index2]]);
-	var valexam = obj1[attrNames3[index2]][index5];
-	//console.log(valexam);
-
-	//MiniLegend
-	var mini1 = svg1.append("rect")
-						.attr("transform","translate(10,10)")
-						.attr("fill","black")
-						.attr("fill-opacity",0.7)
-						.attr("height","5px")
-						.attr("width","40px");
-
-	var mini2 = svg1.append("rect")
-						.attr("transform","translate(10,25)")
-						.attr("fill","lightsteelblue")
-						.attr("fill-opacity",0.7)
-						.attr("height","5px")
-						.attr("width","40px");
-
-	var mini3 = svg1.append("rect")
-						.attr("transform","translate(10,40)")
-						.attr("fill","gray")
-						.attr("fill-opacity",0.7)
-						.attr("height","5px")
-						.attr("width","40px");
-
-	var mini4 = svg1.append("rect")
-						.attr("transform","translate(10,55)")
-						.attr("fill","lightgreen")
-						.attr("fill-opacity",0.7)
-						.attr("height","5px")
-						.attr("width","40px");
-
-	var mini5 = svg1.append("rect")
-						.attr("transform","translate(10,70)")
-						.attr("fill","red")
-						.attr("fill-opacity",0.4)
-						.attr("height","20px")
-						.attr("width","40px");
-
-	var rect11 = svg1.append("text")
-						.attr("font-size","15px")
-						.attr("transform","translate(60,"+(10+5)+")")
-						.attr("fill","black")
-						.text("Maximum");
-
-	var rect12 = svg1.append("text")
-						.attr("font-size","15px")
-						.attr("transform","translate(60,"+(25+5)+")")
-						.attr("fill","black")
-						.text("Minimum");
-
-	var rect13 = svg1.append("text")
-						.attr("font-size","15px")
-						.attr("transform","translate(60,"+(40+5)+")")
-						.attr("fill","black")
-						.text("Moyenne");
-
-	var rect14 = svg1.append("text")
-						.attr("font-size","15px")
-						.attr("transform","translate(60,"+(55+5)+")")
-						.attr("fill","black")
-						.text("Médiane");
-
-	var rect14 = svg1.append("text")
-						.attr("font-size","15px")
-						.attr("transform","translate(60,"+(80+5)+")")
-						.attr("fill","black")
-						.attr("height","20px")
-						.attr("width","150px")
-						.text("Valeur prototype");
-
-
-	var rectMax = svg1.append("rect")
-						.attr("transform",function(){ return "translate(10,"+(100+10+(20*index2))+")";})
-						.attr("fill","black")
-						.attr("fill-opacity",0.7)
-						.attr("height","5px")
-						.attr("width",scale2(dataGen[0][index2])+"px");	
-	var rectMin = svg1.append("rect")
-						.attr("transform",function(){ return "translate(10,"+(100+15+(20*index2))+")";})
-						.attr("fill","lightsteelblue")
-						.attr("fill-opacity",0.7)
-						.attr("height","5px")
-						.attr("width",scale2(dataGen[1][index2])+"px");	
-	var rectMoy = svg1.append("rect")
-						.attr("transform",function(){ return "translate(10,"+(100+20+(20*index2))+")";})
-						.attr("fill","gray")
-						.attr("fill-opacity",0.7)
-						.attr("height","5px")
-						.attr("width",scale2(dataGen[2][index2])+"px");
-	var rectMed = svg1.append("rect")
-						.attr("transform",function(){ return "translate(10,"+(100+25+(20*index2))+")";})
-						.attr("fill","lightgreen")
-						.attr("fill-opacity",0.7)
-						.attr("height","5px")
-						.attr("width",scale2(dataGen[2][index2])+"px");
-
-	var rect1 = svg1.append("rect")
-						.attr("transform",function(){ return "translate(10,"+(100+10+(20*index2))+")";})
-						.attr("fill","red")
-						.attr("fill-opacity",0.4)
-						.attr("height","20px")
-						.attr("width","0px")
-						.transition().duration(1500).ease("bounce")
-						.attr("width",function(){ 
-							if (isNaN(valexam)) { return "0px";}
-							else { return scale2(valexam)+"px"; }
-							});
-
-	var rect2 = svg1.append("text")
-						.attr("font-size","15px")
-						.attr("transform",function(){ return "translate(350,"+(100+30+(20*index2))+")";})
-						.attr("fill","black")
-						.attr("height","20px")
-						.attr("width","150px")
-						.text(attrNames3[index2]);
-	};
-
-};
-
-
 
 
 function appendChoice(attNames,dataF,dataF2,confCell){
+
 
 	var modifArea = d3.select("div.boutonsSup").append("div").classed("modifArea",true);
 
@@ -421,13 +227,13 @@ function appendChoice(attNames,dataF,dataF2,confCell){
 
 	modifArea.append("input").attr("id","cellsSize")
 							.attr("type","text")
-							.attr("value","Entrez la card de cellule désirée 1<x<50");
+							.attr("value","Entrez la taille de cellule désirée 1<x<50");
 
 	modifArea.append("button")
 				.attr("id","ValidChoice")
 				.text("Effectuer les changements");
 
-	document.querySelector("#ValidChoice").addEventListener("click",function(){ ModifDimSizeCells(dataF); });
+	document.querySelector("#ValidChoice").addEventListener("click",function(){ ModifDimSizeCells(dataF,confCell.rectTaill,confCell.dimY); });
 
 
 	var choiceB = d3.select("div.legendG").append("div").classed("choiceAtt",true);
@@ -435,11 +241,6 @@ function appendChoice(attNames,dataF,dataF2,confCell){
 	var selectAtt1 = divChoixDeroulantAtt.append("select").attr("id","selectAtt1")
 												.attr("size","5");
 	
-for (var clee in confCell) { 
-		if (clee == "dimX") { /* console.log("On ne touche pas à dimX") */ }
-		else if (clee == "dimY") { /* console.log("On ne touche pas à dimY") */ }
-		else { confCell[clee] *= 3; }
-							};
 
 	for (var i = 0; i < attNames.length; i++) {
 
@@ -449,37 +250,11 @@ for (var clee in confCell) {
 							.attr("value",attNames[i]);
 
 						unAtt.text(attNames[i]);
-						/*
-						unAtt.on("change",function(){ 
-							console.log("yoyyy")
-							showUniqAtt(this.value,dimY,dataUp2); });
-						*/
-/*
-	var butt = document.getElementById("butAtt"+i);
-	//butt.onclick = showUniqAtt(attNames[i],dataF);		//oldschool methode
-	butt.addEventListener('click',function(e){
-											//console.log(e);
-											//console.log(this);
-											showUniqAtt(this.value,dataF2,confCell);
-											 }
-					,false);
-	//console.log(butt);
-*/
+
 	};
 
 	var leSelect = document.getElementById("selectAtt1");
-/*
 
-	leSelect.addEventListener('onchange', function(el){
-    var options = this.children;
-    console.log(options);
-    for(var i=0; i < this.childElementCount; i++){
-        options[i].style.color = '#79bbff';
-    }
-    var selected = this.children[this.selectedIndex];
-        selected.style.color = 'red';
-    }, false);
-*/
 	var butAct =  choiceB.append("button").attr("class","b1")
 													.attr("size","5")
 													.attr("id","Activation");
@@ -576,7 +351,7 @@ var cell1 = gg3.append("rect")
 					if (d) {return scale1(d);}
 					else { return "white"}
 										})
-				//.on("dblclick",function(d,i){foncInfo5(ObjF,i);});
+				//.on("dblclick",function(d,i){foncInfo(ObjF,i);});
 
 
 var cell2 = gg3.append("rect")
@@ -585,7 +360,7 @@ var cell2 = gg3.append("rect")
 		        .attr("y", confCell.rectPadding)
 		        .attr("height",confCell.rectTaill)
 		        .attr("width",confCell.rectTaill)
-				.on("dblclick",function(d,i){foncInfo5(ObjF,i);});
+				.on("dblclick",function(d,i){foncInfo(ObjF,i);});
 
 	//Legend attribut
 	var leg = fen.append("div").classed("attName",true)
@@ -599,7 +374,7 @@ var cell2 = gg3.append("rect")
 
 
 
-function ModifDimSizeCells(data){
+function ModifDimSizeCells(data,rectTaill,dimY){
 
 	var htmlElem = document.getElementById("dimYCells");
 	var val1 = htmlElem.value;
@@ -610,9 +385,9 @@ function ModifDimSizeCells(data){
 	//console.log(val1);
 
 
-	if (isNaN(val1) && isNaN(val2)) { tracerCell(10,25,data); }
-	else if (isNaN(val1) && !isNaN(val2)) { tracerCell(10,val2,data); }
-	else if (!isNaN(val1) && isNaN(val2)) { tracerCell(val1,25,data); }
+	if (isNaN(val1) && isNaN(val2)) { tracerCell(dimY,rectTaill,data); }
+	else if (isNaN(val1) && !isNaN(val2)) { tracerCell(dimY,val2,data); }
+	else if (!isNaN(val1) && isNaN(val2)) { tracerCell(val1,rectTaill,data); }
 	else { tracerCell(val1,val2,data); }
 
 };
@@ -641,23 +416,5 @@ function zoom1All() {
 
 
 
-function propagEventDeg(){
-
-	//Pb viens des svg
-
-	var cells = document.getElementsByClassName('mapAtt');
-	console.log(cells);	// [item: function]
-	console.log(cells[0]);	//	undefined
-	console.log(cells.item(0));	//	none
-	console.log(cells.length);	//  0
-
-	var cells2 = document.querySelectorAll(".mapAtt");
-	console.log(cells2);	// [item: function]
-	console.log(cells2[0]);	//	undefined
-	console.log(cells2.item(5));	//	none
-	console.log(cells2.length);	//  0
-
-
-};
 
 

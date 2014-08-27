@@ -114,28 +114,6 @@ function traitDataCsv(data) {
       }
 
   //console.log("tabAtt=",tabAtt);
-  
-/*
-  for (var i = 0; i < toChangestr.length; i++) {
-    console.log(toChangestr[i]);
-  };
-
-  for (var i = 0; i < tabAtt[0].length; i++) {
-    console.log(tabAtt[0][i]);
-  };
-
-  //If dernier attribut entouré de " on ne sais trop pk
-  //console.log(toChangestr.search(/"/));
-  //console.log(toChangestr.search(/'/));
-  // on ne trouve pas de " ou ' alors qu'il y en a ... pk ???
-
-  //toChangestr = toChangestr.slice(0,toChangestr.length-1) // on enlève l'espace automatique dont on ne sais ou après le dernier attribut
-*/
-
-
-  // on réitère l'opération au cas ou l'user aurait laissé des espaces trainés
-
-
 
 
   tabAtt.pop();
@@ -163,24 +141,6 @@ function traitDataCsv(data) {
   //console.log("tab3=",tab3);
 
 
-
-  //console.log(tab3);
-  /*
-  Pas besoin de fournir les données sous 2 formats tab3/tab4
-  On prend uniquement tab3 qui est le plus svt use dans les visu actuels
-  Au besoin on fera la transfo ver tab4 dans la visu qui le requier
-  afin de réduire les besoins en ressources et le temps de calcul.
-
-  var tab4 = {} // tab des attibuts
-  for (var i = 0; i < tabAtt.length; i++) {
-      tab4[tabAtt[i]] = [];
-    for (var j = 0; j < tab2.length; j++) {
-      tab4[tabAtt[i]].push(+tab2[j][i]);  //coerce values
-    };
-  };
-  //console.log(tab4);
-  var tabF = [tab3,tab4];
-  */
 
   var tabF = tab3;
 
@@ -299,6 +259,196 @@ function traitDataJson1(data) {
 
   console.log(tab1);
 } 
+
+
+
+
+
+
+function parseDataMathlab(data1) {
+
+  var data = data1,
+    dataRez = [],
+    indicAttLign;
+  //console.log(data);
+  //console.log(data.match(regex1)[0]);
+
+  //On extrait le nom des attributs
+  indicAttLign = data.indexOf("\n");
+  var strAtt1 = data;
+    strAtt1 = strAtt1.slice(0,indicAttLign);
+    //console.log("stratt1 = ",strAtt1);
+    data = data.slice(indicAttLign+1,data.length);
+    //console.log(data);
+
+
+
+
+
+  var nbLign = nbLignes(data);
+  var nbAtt = nbAttributs(data);
+
+  var attNames = strAtt1.split(" ",nbAtt);
+  //console.log(attNames);
+  //console.log(nbLign,nbAtt);
+  //console.log(data);
+
+  // On s'occupe de la dernière car on sais pas ce qui se passe avec la méthode ci-dessous
+  var indexLastLigne = data.lastIndexOf("\n"),
+    cpdata = data;
+    cpdata = cpdata.slice(indexLastLigne+1,cpdata.length)
+    //console.log("cpdata = ",cpdata);
+
+
+
+  // On s'occupe des n-1 premières ligne
+  for (var i = 0; i < nbLign-1; i++) {
+    dataRez.push(new Array());
+
+    var indexLigneVide = data.indexOf("\n"),
+      datacp2 = data;
+      datacp2 = datacp2.slice(0,indexLigneVide)
+      if (datacp2.indexOf(" ") == -1) {
+          var indexLigne3 = data.indexOf("\n");
+          indexLigne3++;
+          data = data.slice(indexLigne3,data.length);
+      }
+      else{
+          dataRez[i] = data.split(" ",nbAtt);
+          // on s'occupe des NbAtt-1 premiers attributs car il ne finise pas par "\n"
+          for (var j = 0; j < nbAtt-1; j++) {
+            dataRez[i][j] = scientToDecimal(dataRez[i][j]);
+          };
+
+          //on s'occupe du dernier attribut en excluant le "\n" de fin de ligne
+          var indexLigne = dataRez[i][nbAtt-1].indexOf("\n");
+          dataRez[i][nbAtt-1] = dataRez[i][nbAtt-1].slice(0,indexLigne);
+          dataRez[i][nbAtt-1] = scientToDecimal(dataRez[i][nbAtt-1]);
+
+          var indexLigne2 = data.indexOf("\n");
+          indexLigne2++;
+          data = data.slice(indexLigne2,data.length);
+        }
+
+  };
+
+    //console.log(data); pk la derniere ligne disparait partiellement
+    // Surement car je coupé à data.length-1 au lieu de data.lengh, toute façon c'est mieux comme ça car dernière ligne pas de "\n"
+    // on prend la dernière ligne récupèrer plus haut avec cpdata pour la traiter comme ci-dessus
+    dataRez.push(new Array());
+    dataRez[i] = cpdata.split(" ",nbAtt);
+    for (var j = 0; j < nbAtt; j++) {
+      dataRez[i][j] = +dataRez[i][j]
+    };
+
+    //console.log(dataRez);
+
+    var dataRez2 = [attNames,dataRez]
+    console.log(dataRez2);
+
+    var dataRezF = [];
+    for (var i = 0; i < dataRez2[1].length; i++) {
+      var obj1 = {};
+      for (var j = 0; j < dataRez2[0].length; j++) {
+        obj1[dataRez2[0][j]] = dataRez2[1][i][j];
+      };
+      dataRezF.push(obj1);
+    };
+    
+    console.log(dataRezF);
+    return dataRezF;
+}
+
+
+//  Compte le nombre de ligne d'un fichier résultat mathlab. IL EST NECESSAIRE DE NE PAS AVOIR DE LIGNE SUPLÉMENTAIRE EN DEBUT/FIN DE FICHIER
+// data1 = string
+function nbLignes(data1) {
+  var cpt = 0,
+    r1 = -1;
+  do {
+      r1 = data1.indexOf("\n",r1+1)
+      //console.log(r1)
+      cpt++ ;
+    } while (r1 != -1)
+  cpt;
+  //console.log(cpt);
+  return cpt;
+};
+
+
+// Compte le nombre d'attribut dans un fichier mathlab en supposant que le dernier attribut ne soit pas suivi d'un espace et que les attributs de la premières ligne soit séparé d'un seul espace !
+// objet sans espace
+function nbAttributs(data1) {
+
+  var indexL1 =  data1.indexOf("\n"),
+    strL1 = data1.slice(0,indexL1), // on extrait la première ligne pour y compter les attributs
+    cpt = 0,
+      posEsp = 0,
+      oldPosEsp;
+    //console.log(strL1)
+  while (posEsp != -1) {
+
+      oldPosEsp = posEsp;
+      posEsp = strL1.indexOf(" ",posEsp+1)
+      if (posEsp-oldPosEsp >= 1 ) {cpt++};
+  
+  }
+  cpt++
+  //console.log(cpt);
+  return cpt++
+};
+
+
+
+
+
+
+
+
+
+// transforme une chaine de caractère représentant un nombre au format scientifique en format décimal interpretable par la machine
+/*
+Accepte les formates suivants
+Le e/E symbolise 10^
+xxx
+xxxE+xxx
+xxxE-xxx
+xxxExxx
+XXXe+XXX
+XXXe-XXX
+XXXeXXX
+*/
+function scientToDecimal(str1) {
+  var strCopy = str1;
+  var tabRez = [];
+
+
+
+  if (/e/i.test(strCopy) == true) {
+
+    var rez1 = strCopy.match(/e/i);
+
+    tabRez.push(strCopy.slice(0,rez1.index)); // on prend la partie avant le E
+    strCopy = str1;       // on réinitie la chaine pour new traitements
+    
+    if (strCopy[rez1.index+1] == "+") {
+      tabRez.push(strCopy.slice(rez1.index+2,strCopy.lenght));
+      return tabRez[0]*Math.pow(10,tabRez[1]);
+    }
+    else if (strCopy[rez1.index+1] == "-") {
+      tabRez.push(strCopy.slice(rez1.index+2,strCopy.lenght));
+      return tabRez[0]*(1/Math.pow(10,tabRez[1]));
+    }
+    else {
+      tabRez.push(strCopy.slice(rez1.index+1,strCopy.lenght));
+      return tabRez[0]*Math.pow(10,tabRez[1]);
+    }
+  
+  }
+
+  else { return +str1; }
+  
+}
 
 
 

@@ -11,7 +11,7 @@ function circlesIn(toto,dimMap,dataUp2,boolLigne) {
 
 
 
-	// Préparation data pour fonction foncInfo5
+	// Préparation data pour fonction foncInfo
 	var to1,to2;
 	to1 = objToAtt(dataUp2[0]);
 	to2 = objToAtt(dataUp2[1]);
@@ -65,12 +65,19 @@ function circlesIn(toto,dimMap,dataUp2,boolLigne) {
 	var bigCellWidth = (2*cellMargin)+(dimX*rectTaill)+((dimX-1)*(2*cellMargin))+bigCellWidthMarg;
 	var bigCellHeight = (2*cellMargin)+(dimY*rectTaill)+((dimY-1)*(2*cellMargin))+bigCellHeightMarg;
 	var rectPadding =  (11+bigCellWidthMarg)/2;
-	var coul = d3.scale.category20();
 
 	attrNames2 = Object.keys(ObjF);
 	//console.log(attrNames2);
 	nbAtt2 = Object.size(dataRezz[0]);
 	//console.log(nbAtt2);
+
+	if (nbAtt2<=10) {
+	var coul = d3.scale.category10();
+	}
+	else {
+	var coul = d3.scale.category20();
+	}
+
 
 	//On efface pour mieux redessiner
 	commeNeuf();
@@ -140,7 +147,7 @@ function circlesIn(toto,dimMap,dataUp2,boolLigne) {
 		        .attr("y", padding / 2)
 		        .attr("width", size - padding)
 		        .attr("height", size - padding)
-				.on("dblclick",function(d,i){foncInfo5(ObjF,i);});
+				.on("dblclick",function(d,i){foncInfo(ObjF,i);});
 
 	        cell.append("text")
 	        	.attr("transform","translate(7,19)")
@@ -199,37 +206,6 @@ var trans1 = cell.append("circle")
 	    			}		    
 			    								}
 
-
-
-	//	Legend Text
-/*
-	d3.select("svg.legLine").append("text")
-		.attr("font-size","20px")
-		.attr("transform", function() {	return "translate(10,"+(nbAtt2*20 + 40)+")";		})
-		.text("Double-cliquez sur une cellule pour des informations");
-
-
- 	d3.select("svg.legLine").append("text")
-		.attr("font-size","20px")
-		.attr("transform", function() {	return "translate(10,"+(nbAtt2*20 + 60)+")";		})
-		.text("complémentaires.");
-
-
- 	d3.select("svg.legLine").append("text")
-		.attr("font-size","20px")
-		.attr("transform", function() {	return "translate(10,"+(nbAtt2*20 + 90)+")";		})
-		.text("Vous pouvez également choisir la disposition des cellules");
-
- 	d3.select("svg.legLine").append("text")
-		.attr("font-size","20px")
-		.attr("transform", function() {	return "translate(10,"+(nbAtt2*20 + 110)+")";		})
-		.text("avec le champs à votre gauche en entrant un valeur ou ");
-
- 	d3.select("svg.legLine").append("text")
-		.attr("font-size","20px")
-		.attr("transform", function() {	return "translate(10,"+(nbAtt2*20 + 130)+")";		})
-		.text("visualiser les attributs de manière indépendante.");
-*/
 
 	//Selection des attributs à observer
 	// Suprime les cercles non selectionnés
@@ -309,51 +285,8 @@ else if (toto != null) {
 };
 
 
-
-
-
-
-
-
-
-function foncInfoCircles(datas,index1) {
-
-	var clesF = d3.keys(datas[0]);
-
-	var ObjF = {};
-	// On initialise les tableau d'attributs
-	for (var i = 0; i < clesF.length; i++) {
-		ObjF[clesF[i]] = [];
-	};
-
-	for (var j = 0; j < datas.length; j++) {
-		for (var i in datas[j]) {
-			ObjF[i].push(datas[j][i]);
-		};
-	};
-
-	d3.select("div.info1").remove();		// on supp les anciens elem pour éviter qu'ils se cumulent
-	d3.select("div.barGraph").remove();		// on supp les anciens elem pour éviter qu'ils se cumulent
-
-	var info1 = d3.select("div.legendG2").append("div")
-								.classed("info1",true);
-
-	info1.append("p").style("font-size","20px")
-					.text(" Valeurs des attributs"); // on fait une marge freestyle
-
-	for (var i in ObjF) {
-		var text1 = i + " : " + ObjF[i][index1];
-		info1.append("p").style("font-size","15px").text(text1);
-
-	};
-
-	var valcalc = moyInfo5(ObjF);
-	barchartInfo(valcalc,ObjF,index1);
-
-};
-
-
-
+// Modifie le remplissage des ligne ou des colonne
+// Change de ligne/colonne toute les val1
 function ModifDimSizeCircles(dataUp3,lignOrCol){
 
 	var htmlElem = document.getElementById("dimYY");
@@ -363,9 +296,6 @@ function ModifDimSizeCircles(dataUp3,lignOrCol){
 	circlesIn([],val1,dataUp3,lignOrCol);
 
 };
-
-
-
 
 
 

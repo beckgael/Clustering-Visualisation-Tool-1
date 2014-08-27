@@ -11,7 +11,7 @@ function histoIn(toto,dimMap,dataUp2,boolLigne) {
 
 
 
-	// Préparation data pour fonction foncInfo5
+	// Préparation data pour fonction foncInfo
 	var to1,to2;
 	to1 = objToAtt(dataUp2[0]);
 	to2 = objToAtt(dataUp2[1]);
@@ -63,8 +63,15 @@ function histoIn(toto,dimMap,dataUp2,boolLigne) {
 		bigCellHeightMarg = 20,
 		bigCellWidth = (2*cellMargin)+(dimX*rectTaill)+((dimX-1)*(2*cellMargin))+bigCellWidthMarg,
 		bigCellHeight = (2*cellMargin)+(dimY*rectTaill)+((dimY-1)*(2*cellMargin))+bigCellHeightMarg,
-		rectPadding =  (11+bigCellWidthMarg)/2,
-		coul = d3.scale.category20b();
+		rectPadding =  (11+bigCellWidthMarg)/2;
+
+
+	if (nbAtt2<=10) {
+		var coul = d3.scale.category10();
+	}
+	else {
+		var coul = d3.scale.category20();
+	}
 
 
 	//console.log(dataUp2);
@@ -82,7 +89,7 @@ function histoIn(toto,dimMap,dataUp2,boolLigne) {
 
 	//On efface pour mieux redessiner
 	commeNeuf();
-	legendCircle(nbAtt);
+	legendCircle(nbAtt2);
 
 	d3.selectAll("div.butAttributs button").remove();
 	d3.select("div.boutons1").remove();
@@ -130,18 +137,6 @@ function histoIn(toto,dimMap,dataUp2,boolLigne) {
  var boutonsAtt = d3.select(".boutonsSup").append("div")
  							.classed("butAttributs",true);
 
-/*
-	d3.select("div.butAttributs").append("button")
-			.attr("class","attsButtons")
-			.attr("id","allCircles1")
-			.text("Tous");
-
-document.querySelector('#allCircles1').onclick = function(){ maj4(10,dimY,dataUp2); };
-*/
-
-
-
-
 
 		//On crée les cellules
 		var cell = svg.selectAll("g.cellCircles")
@@ -151,16 +146,16 @@ document.querySelector('#allCircles1').onclick = function(){ maj4(10,dimY,dataUp
 			    .classed("cellCircles",true)
 			    .attr("transform", function(d,i) { //console.log(d);
 			    	var posId = posInd(i,dimY)	// retourne les indices de pos
-			    	return inversLigneColonHisto(boolLigne,posId,rectTaill,cellMargin,nbAtt,rectHistoWidth,padding); });
+			    	return inversLigneColonHisto(boolLigne,posId,rectTaill,cellMargin,nbAtt2,rectHistoWidth,padding); });
 
 			//Background cellules
 		    cell.append("rect")
 		        .attr("class", "frame")		    
 		        .attr("x", padding / 2)
 		        .attr("y", padding / 2)
-		        .attr("width", rectHistoWidth*nbAtt + padding)
+		        .attr("width", rectHistoWidth*nbAtt2 + padding)
 		        .attr("height", 90)
-				.on("dblclick",function(d,i){foncInfoCircles(dataUp2[1],i);});
+				.on("dblclick",function(d,i){foncInfo(ObjF,i);});
 
 	        cell.append("text")
 	        	.attr("transform","translate(7,19)")
@@ -170,7 +165,7 @@ document.querySelector('#allCircles1').onclick = function(){ maj4(10,dimY,dataUp
 
 
 		// On construit les echelles adaptées aux intervalles des attributs
-		scaleTab = tabScale(data2,68,nbAtt);
+		scaleTab = tabScale(data2,68,nbAtt2);
 		scaleTab2 = tabScaleGen(ObjF,attrNames2,68,nbAtt2);
 
 
@@ -219,39 +214,6 @@ var trans1 = cell.append("rect")
 
 			    								}
 
-
-
-
-
-	//	Legend Text
-/*
-	d3.select("svg.legLine").append("text")
-		.attr("font-size","20px")
-		.attr("transform", function() {	return "translate(10,"+(nbAtt*20 + 40)+")";		})
-		.text("Double-cliquez sur une cellule pour des informations");
-
-
- 	d3.select("svg.legLine").append("text")
-		.attr("font-size","20px")
-		.attr("transform", function() {	return "translate(10,"+(nbAtt*20 + 60)+")";		})
-		.text("complémentaires.");
-
-
- 	d3.select("svg.legLine").append("text")
-		.attr("font-size","20px")
-		.attr("transform", function() {	return "translate(10,"+(nbAtt*20 + 90)+")";		})
-		.text("Vous pouvez également choisir la disposition des cellules");
-
- 	d3.select("svg.legLine").append("text")
-		.attr("font-size","20px")
-		.attr("transform", function() {	return "translate(10,"+(nbAtt*20 + 110)+")";		})
-		.text("avec le champs à votre gauche en entrant un valeur ou ");
-
- 	d3.select("svg.legLine").append("text")
-		.attr("font-size","20px")
-		.attr("transform", function() {	return "translate(10,"+(nbAtt*20 + 130)+")";		})
-		.text("visualiser les attributs de manière indépendante.");
-*/
 
 
 	// Suprime les cercles non selectionnés

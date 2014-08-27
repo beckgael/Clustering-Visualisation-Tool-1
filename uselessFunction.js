@@ -489,3 +489,62 @@ function elagage(tab3){
   };
   return reZ;
 }
+
+
+
+//  Useless
+function foncInfoCircles(datas,index1) {
+
+  var clesF = d3.keys(datas[0]);
+
+  var ObjF = {};
+  // On initialise les tableau d'attributs
+  for (var i = 0; i < clesF.length; i++) {
+    ObjF[clesF[i]] = [];
+  };
+
+  for (var j = 0; j < datas.length; j++) {
+    for (var i in datas[j]) {
+      ObjF[i].push(datas[j][i]);
+    };
+  };
+
+  d3.select("div.info1").remove();    // on supp les anciens elem pour éviter qu'ils se cumulent
+  d3.select("div.barGraph").remove();   // on supp les anciens elem pour éviter qu'ils se cumulent
+
+  var info1 = d3.select("div.legendG2").append("div")
+                .classed("info1",true);
+
+  info1.append("p").style("font-size","20px")
+          .text(" Valeurs des attributs"); // on fait une marge freestyle
+
+  for (var i in ObjF) {
+    var text1 = i + " : " + ObjF[i][index1];
+    info1.append("p").style("font-size","15px").text(text1);
+
+  };
+
+  var valcalc = moyInfo5(ObjF);
+  barchartInfo(valcalc,ObjF,index1);
+
+};
+
+//Useless
+function propagEventDeg(){
+
+  //Pb viens des svg
+
+  var cells = document.getElementsByClassName('mapAtt');
+  console.log(cells); // [item: function]
+  console.log(cells[0]);  //  undefined
+  console.log(cells.item(0)); //  none
+  console.log(cells.length);  //  0
+
+  var cells2 = document.querySelectorAll(".mapAtt");
+  console.log(cells2);  // [item: function]
+  console.log(cells2[0]); //  undefined
+  console.log(cells2.item(5));  //  none
+  console.log(cells2.length); //  0
+
+
+};

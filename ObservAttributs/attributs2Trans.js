@@ -145,7 +145,7 @@ function tracerProp3(dataUp2){
 			//console.log("_____data______");
 			//console.log(d);
 			//console.log(d.indice);
-			foncInfo5bis(d,ObjF,d.indice-1);	// on lui applique un eventhandler de manière séparer de la transition sinon bog
+			foncInfobis(d,ObjF,d.indice-1);	// on lui applique un eventhandler de manière séparer de la transition sinon bog
 			});
 
 
@@ -186,7 +186,7 @@ function tracerProp3(dataUp2){
 
 
 
-function foncInfo5bis(data,datas,index1) {
+function foncInfobis(data,datas,index1) {
 
 		//	On enlève pour mieux redessiner
 

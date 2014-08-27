@@ -55,13 +55,14 @@ function tracerCellHisto(dimY1,rectTaillUser,dataUp2) {
 	var dimY = dimY1;
 	var dimX = Math.floor((nbElem)/dimY)+1;
 	var cellMargin = 3;
-	var bigCellWidthMarg = 9;
+	var bigCellWidthMarg = 20;
 	var bigCellHeightMarg = 50;
 	var bigCellWidth = (2*cellMargin)+(dimX*rectTaill)+((dimX-1)*(2*cellMargin))+bigCellWidthMarg;
 	var bigCellHeight = (2*cellMargin)+(dimY*rectTaill)+((dimY-1)*(2*cellMargin))+bigCellHeightMarg;
 	var rectPadding =  rectTaill;
 	//(15+bigCellWidthMarg);
 	//console.log(bigCellHeight);
+
 
 	// On regroupe toute ces données dans un obj pour les réutiliser au besoin dans des fonctions
 	var confCell = {};
@@ -186,7 +187,7 @@ var cell1 = gg3.append("rect")
 					}
 				catch(e) {}
 										});
-				//.on("dblclick",function(d,i){foncInfo5(ObjF,i);});	//useless si même fct sur le deuxieme rect qui est "au-dessus"
+				//.on("dblclick",function(d,i){foncInfo(ObjF,i);});	//useless si même fct sur le deuxieme rect qui est "au-dessus"
 
 var cell2 = gg3.append("rect")
 				.classed("cellRect2",true)
@@ -194,7 +195,7 @@ var cell2 = gg3.append("rect")
 		        .attr("y", rectPadding)
 		        .attr("height",25)
 		        .attr("width",25)
-				.on("dblclick",function(d,i){foncInfo5(ObjF,i);});
+				.on("dblclick",function(d,i){foncInfo(ObjF,i);});
 
 
 	//Legend attribut
