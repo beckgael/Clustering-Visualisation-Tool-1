@@ -210,15 +210,15 @@ var optGroup0 = ChoixDeroulant.append("optgroup").attr("label","Veuillez selecti
 	optGroup0.append("option").classed("opt0","true")
 									.text("Circles Chart");
 	optGroup0.append("option").classed("opt0","true")
-									.text("Cells Chart");
+									.text("Cells Chart with 'card' attribute");
 	optGroup0.append("option").classed("opt0","true")
-									.text("Cells Bar Chart");
+									.text("Cells Bar Chart with 'card' attribute");
 	optGroup0.append("option").classed("opt0","true")
 									.text("Proportions Chart");
 	optGroup0.append("option").classed("opt0","true")
 									.text("Bar Chart");
 	optGroup0.append("option").classed("opt0","true")
-									.text("ParaCoord");
+									.text("Cells without 'card' attribute");
 									
 //	optGroup0.append("option").classed("opt0","true")
 //									.text("Parralel Coordinate");
@@ -239,7 +239,7 @@ var choice00 = document.getElementById("choice0");
 			case 1 : tracerCell(10,25,dataEncT[0],true);
 						break;
 
-			case 2 : degColHisto(10,25,dataEncT[0]);
+			case 2 : tracerCellHisto(10,25,dataEncT[0],true);
 						break;
 
 			case 3 :  tracerProp3(dataEncT[0]);
@@ -248,10 +248,7 @@ var choice00 = document.getElementById("choice0");
 			case 4 :  histo1(dataEncT[0]);
 						break;
 
-			case 5 :  parralelCoord(dataEncT[0]);
-						break;
-
-			case 6 : parralelCoord();
+			case 5 : tracerCell2(10,25,dataEncT[0],true);
 						break;
 
 			default : break;
@@ -282,7 +279,7 @@ var choice00 = document.getElementById("choice0");
 			case 4 :  histo1(dataEncT[0]);
 						break;
 
-			case 5 :  parralelCoord(dataEncT[0]);
+			case 5 :  tracerCell2(10,25,dataEncT[0],true);
 						break;
 
 			default : break;

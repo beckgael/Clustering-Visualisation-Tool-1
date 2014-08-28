@@ -1,55 +1,33 @@
-function degColHisto(dimY1,rectTaillUser,dataUp){
-
-			//On efface pour mieux redessiner =)
-			commeNeuf();
+function tracerCell2(dimY1,rectTaillUser,dataUp2,boolLign) {
 
 
+	//On efface pour mieux redessiner =)
+	commeNeuf();
+	
+	//On refait les socles
+	var boutons12 = d3.select("div.legendG2")
+							.append("div")
+							.classed("boutons12",true);
 
-		//On refait les socles
-
-var boutons12 = d3.select("div.legendG2")
-						.append("div")
-						.classed("boutons12",true);
-
-var boutons2 = d3.select("div.legendG2")
+	var boutons2 = d3.select("div.legendG2")
 						.append("div")
 						.classed("boutons2",true)
 						.attr("id","b2");
 
-		tracerCellHisto(dimY1,rectTaillUser,dataUp);
-
-
-};
-
-function tracerCellHisto(dimY1,rectTaillUser,dataUp2) {
-
-	//console.log(dataUp2);
 
 	var to1,to2;
 	to1 = objToAtt(dataUp2[0]);
 	to2 = objToAtt(dataUp2[1]);
 
-	//console.log(to1);
-	//console.log(to2);
-
+	//On concatène to1 et to2
 	for (var j in to2) {
 		to1[j] = to2[j];
 	}
-	//console.log(to1);
 
 	var ObjF = to1;
-
-
 	var clesF = d3.keys(ObjF);
-
 	var nbElem = ObjF[clesF[0]].length;
-
 	var nbCells = Object.size(ObjF);
-	var lala;
-	if (nbCells <= 100) { lala = 25 }
-	else if (100 < nbCells <= 200) { lala = 20 }
-	else if (200 < nbCells <= 400) { lala = 15 }
-
 
 	var rectTaill = rectTaillUser;  // 25 de base
 	var dimY = dimY1;
@@ -60,59 +38,37 @@ function tracerCellHisto(dimY1,rectTaillUser,dataUp2) {
 	var bigCellWidth = (2*cellMargin)+(dimX*rectTaill)+((dimX-1)*(2*cellMargin))+bigCellWidthMarg;
 	var bigCellHeight = (2*cellMargin)+(dimY*rectTaill)+((dimY-1)*(2*cellMargin))+bigCellHeightMarg;
 	var rectPadding =  rectTaill;
-	//(15+bigCellWidthMarg);
-	//console.log(bigCellHeight);
+
+
+	if (!boolLign) {
+		var temp = bigCellHeight;
+		bigCellHeight = bigCellWidth;
+		bigCellWidth = temp;
+	};
+
 
 
 	// On regroupe toute ces données dans un obj pour les réutiliser au besoin dans des fonctions
 	var confCell = {};
 	confCell.cellMargin = cellMargin;
-	confCell.rectTaill = rectTaill ; 
-	confCell.dimX = dimX ; 
-	confCell.dimY = dimY ; 
-	confCell.bigCellWidthMarg = bigCellWidthMarg ; 
-	confCell.bigCellHeightMarg = bigCellHeightMarg ; 
-	confCell.bigCellWidth = bigCellWidth ; 
-	confCell.bigCellHeight = bigCellHeight ; 
-	confCell.rectPadding = rectPadding ;
+	confCell.rectTaill = rectTaill; 
+	confCell.dimX = dimX; 
+	confCell.dimY = dimY; 
+	confCell.bigCellWidthMarg = bigCellWidthMarg; 
+	confCell.bigCellHeightMarg = bigCellHeightMarg; 
+	confCell.bigCellWidth = bigCellWidth; 
+	confCell.bigCellHeight = bigCellHeight; 
+	confCell.rectPadding = rectPadding;
 
-	//console.log(confCell);
 
 	var tabIndTaill = [];
 	var tabTaill = [];
 
-	//console.log(ObjF);
-
-	for (var i = 0; i < ObjF["card"].length; i++) {
-		if (ObjF["card"][i] == 0) {}
-		else { var obj = { "index" : i , "card" : ObjF["card"][i] }
-			tabIndTaill.push(obj);
-			tabTaill.push(ObjF["card"][i]); }
-	};
-
-	var indPostabTaill = 0;	// indice permettant le repérage des prototypes adéquat lors du traçage par d3
-	var indPostabTaill2 = 0;	// indice permettant le repérage des prototypes adéquat lors du traçage par d3
-	var indPostabTaill3 = 0;	// indice permettant le repérage des prototypes adéquat lors du traçage par d3
-	var tailleMax = d3.max(tabTaill);
-	//console.log(tabIndTaill);
-	//console.log(tailleMax);
-	//console.log(rectTaill);
-
-	var scalePropRect = d3.scale.linear().domain([d3.min(tabTaill),d3.max(tabTaill)]).range([20,100]);
-	var rezScale = [];
-
-	for (var i = 0; i < tabTaill.length; i++) {
-		rezScale.push(scalePropRect(tabTaill[i]));
-	};
-
-	//console.log(tabTaill);
-	//console.log(rezScale);
-
-	//console.log(ObjF);
-
 
 	var cellsArea = d3.select("div.dessein").append("div").classed("cellsArea",true);
 	var cellsArea2 = cellsArea.append("div").classed("cellsArea2",true);
+
+
 
 
 	for (var i = 0; i < Object.size(ObjF); i++) {
@@ -139,7 +95,7 @@ var coul = ["#393b79" , "#5254a3" , "#6b6ecf" , "#9c9ede" , "#637939" , "#8ca252
 var scale1 = d3.scale.linear().domain([d3.min(ObjF[clesF[i]]),d3.max(ObjF[clesF[i]])]).range(["white",coul[i]]);
 
 var svg3 = fen.append("svg").classed("svgCell",true)
-							.style("height",(bigCellHeight-bigCellHeightMarg+rectTaill)+"px")
+							.attr("height",(bigCellHeight-bigCellHeightMarg+rectTaill)+"px")
 							.call(	d3.behavior.zoom()
 					                    .scaleExtent([0.1, 30]) 
 					                    .on("zoom", zoom1All)
@@ -156,45 +112,27 @@ var gg3 = svg3.selectAll("g.svgG")
 	gg3.transition().duration(1500).ease("linear")
 							.attr("transform", function(d,i) { //console.log(d);
 			    	var posId = posInd(i,dimY)	// retourne les indices de pos
-			    	return "translate(" + posId[0] * (rectTaill+cellMargin) + "," + posId[1] * (rectTaill+cellMargin) + ")"; });
+			    	return inversLigneColon(boolLign,posId,rectTaill,cellMargin); });
 
 
+//console.log(tabIndTaill);
 
 var cell1 = gg3.append("rect")
 				.classed("cellRect",true)
 		        .attr("x", rectPadding)
 		        .attr("y", rectPadding)
-		        .attr("height",function(d,i){
-		        try{
-		        	//console.log(tabIndTaill[indPostabTaill]["index"]);
-		        	if (d && i == tabIndTaill[indPostabTaill3]["index"]) {
-		        		//console.log(indPostabTaill3);
-		        		indPostabTaill3++;
-		        		//console.log(rezScale[indPostabTaill3-1]);
-		        		return ((((rezScale[indPostabTaill3-1]))/(100))*rectTaill);
-		        	}
-		        	else { return 0; }
-		        	}
-		        catch(e) {}
-		        })
-		        .attr("width",25)
-				.attr("fill", function(d,i){ 
-				try{
-					if (d && i == tabIndTaill[indPostabTaill]["index"]) {
-						indPostabTaill++;
-						return scale1(d);}
-					else { return "white"}
-					}
-				catch(e) {}
-										});
+		        .attr("height",rectTaill)
+		        .attr("width",rectTaill)
+				.attr("fill", function(d,i){return scale1(d); });
 				//.on("dblclick",function(d,i){foncInfo(ObjF,i);});	//useless si même fct sur le deuxieme rect qui est "au-dessus"
+
 
 var cell2 = gg3.append("rect")
 				.classed("cellRect2",true)
 		        .attr("x", rectPadding)
 		        .attr("y", rectPadding)
-		        .attr("height",25)
-		        .attr("width",25)
+		        .attr("height",rectTaill)
+		        .attr("width",rectTaill)
 				.on("dblclick",function(d,i){foncInfo(ObjF,i);});
 
 
@@ -206,15 +144,52 @@ var cell2 = gg3.append("rect")
 						.text(function(){ return clesF[i]; });
 
 
-	indPostabTaill = 0;		// on réinitialise les indices pour traçer les nouveaux attributs
-	indPostabTaill2 = 0;	// on réinitialise les indices pour traçer les nouveaux attributs
-	indPostabTaill3 = 0;	// on réinitialise les indices pour traçer les nouveaux attributs
 	};
 
+
+	//Bontons d'aides
+d3.select("#help0").remove();
+d3.select("div.div2Buttons").append("button").attr("id","help0").text("Help");
+document.querySelector("#help0").addEventListener("click",function(){helpUserCells();});
 
 
 	//Boutons de selections pour observer un attribut unique
 
-	appendChoice(clesF,dataUp2,ObjF,confCell);
+	appendChoice2(clesF,dataUp2,ObjF,confCell);
 
 };
+
+
+
+
+function appendChoice2(attNames,dataF,dataF2,confCell){
+
+
+	var modifArea = d3.select("div.boutonsSup").append("div").classed("modifArea",true);
+
+
+	modifArea.append("input").attr("id","dimYCells")
+							.attr("type","text")
+							.attr("value","Entrez la dimension désirée 1<x");
+
+	modifArea.append("input").attr("id","cellsSize")
+							.attr("type","text")
+							.attr("value","Entrez la taille de cellule désirée 1<x<50");
+
+	modifArea.append("button")
+				.attr("id","ValidChoice")
+				.text("Effectuer les changements");
+
+	document.querySelector("#ValidChoice").addEventListener("click",function(){ ModifDimSizeCells(dataF,confCell.rectTaill,confCell.dimY); });
+
+
+};
+
+
+
+
+
+
+
+
+
