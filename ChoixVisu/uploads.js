@@ -223,9 +223,12 @@ var optGroup0 = ChoixDeroulant.append("optgroup").attr("label","Veuillez selecti
 //	optGroup0.append("option").classed("opt0","true")
 //									.text("Parralel Coordinate");
 
+var clickWorkOn = 0;
+
 var choice00 = document.getElementById("choice0");
 
 	choice00.addEventListener("click",function(e){
+		clickWorkOn++;
 		//console.log(choice00.options);
 		//console.log(choice00.selectedIndex);
 
@@ -256,35 +259,39 @@ var choice00 = document.getElementById("choice0");
 
 	});
 
-	choice00.addEventListener("change",function(e){
-		//console.log(choice00.options);
-		//console.log(choice00.selectedIndex);
+	if (clickWorkOn == 0) {
+		console.log("Yeah",clickWorkOn);
 
-		//var choix0 = choice00.selectedIndex;
+		choice00.addEventListener("change",function(e){
+			//console.log(choice00.options);
+			//console.log(choice00.selectedIndex);
 
-		switch (choice00.selectedIndex) {
+			//var choix0 = choice00.selectedIndex;
 
-			case 0 : circles(dataEncT[0])
-						break;
+			switch (choice00.selectedIndex) {
 
-			case 1 : tracerCell(10,25,dataEncT[0]);
-						break;
+				case 0 : circles(dataEncT[0])
+							break;
 
-			case 2 : degColHisto(10,25,dataEncT[0]);
-						break;
+				case 1 : tracerCell(10,25,dataEncT[0]);
+							break;
 
-			case 3 :  tracerProp3(dataEncT[0]);
-						break;
+				case 2 : degColHisto(10,25,dataEncT[0]);
+							break;
 
-			case 4 :  histo1(dataEncT[0]);
-						break;
+				case 3 :  tracerProp3(dataEncT[0]);
+							break;
 
-			case 5 :  tracerCell2(10,25,dataEncT[0],true);
-						break;
+				case 4 :  histo1(dataEncT[0]);
+							break;
 
-			default : break;
-		}
-	});
+				case 5 :  tracerCell2(10,25,dataEncT[0],true);
+							break;
+
+				default : break;
+			}
+		});
+	};
 }
 
 
