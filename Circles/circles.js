@@ -86,8 +86,11 @@ function circlesIn(toto,dimMap,dataUp2,boolLigne) {
 	d3.selectAll("div.butAttributs button").remove();
 	d3.select("div.boutons1").remove();
 
-	var cellsArea = d3.select("div.dessein").append("div").classed("cellsArea1",true);
-	var cellsArea2 = cellsArea.append("div").classed("cellsArea22",true);
+	var cellsArea = d3.select("div.dessein")
+							.append("div")
+							.classed("cellsArea1",true);
+	var cellsArea2 = cellsArea.append("div")
+								.classed("cellsArea22",true);
 
 							
 	var svg = cellsArea2.append("svg")			// on ajoute un espace SVG

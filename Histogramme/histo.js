@@ -272,24 +272,21 @@ else if (toto != null) {
 
 	butAct.on("click",function() {
 
-	var lol = document.getElementById("AttVisible");
-	var tabElemSelect = [];
+		var lol = document.getElementById("AttVisible");
+		var tabElemSelect = [];
 
-	for (var i = 0; i < lol.options.length; i++) {
-		if (lol.options[i].selected) { 
-			tabElemSelect.push(i) };
-	};
-
+		for (var i = 0; i < lol.options.length; i++) {
+			if (lol.options[i].selected) { 
+				tabElemSelect.push(i) };
+		};
+		//console.log(tabElemSelect);
+		histoIn(tabElemSelect,dimY,dataUp2,boolLigne);
+	});
+	
 	//Help button
 	d3.select("#help0").remove();
 	d3.select("div.div2Buttons").append("button").attr("id","help0").text("Help");
 	document.querySelector("#help0").addEventListener("click",function(){helpUserHisto();});
-
-
-
-	//console.log(tabElemSelect);
-	histoIn(tabElemSelect,dimY,dataUp2,boolLigne);
-	});
 	
 };
 

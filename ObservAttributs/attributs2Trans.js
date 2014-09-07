@@ -145,7 +145,7 @@ function tracerProp3(dataUp2){
 			//console.log("_____data______");
 			//console.log(d);
 			//console.log(d.indice);
-			foncInfobis(d,ObjF,d.indice-1);	// on lui applique un eventhandler de manière séparer de la transition sinon bog
+			foncInfo(ObjF,d.indice-1);	// on lui applique un eventhandler de manière séparer de la transition sinon bog
 			});
 
 
@@ -171,6 +171,7 @@ function tracerProp3(dataUp2){
 
 
 	d3.select("#help0").remove();
+
 	d3.select("div.div2Buttons").append("button").attr("id","help0").text("Help");
 
 	document.querySelector("#help0").addEventListener("click",function(){helpUserProp();});

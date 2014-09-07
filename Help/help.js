@@ -58,11 +58,12 @@ function helpUserHisto() {
 }
 
 function helpUserProp() {
+
 	d3.select("div.HelpCircles").remove();
 
 	var h1 = d3.select("div.legendG").append("div")
 							.classed("HelpCircles",true);
 							
 		h1.append("p").text("Intéractivité disponible :");
-		h1.append("p").text("Clic sur une petite cellule pour obtenir des informations complémentaires.");
+		h1.append("p").text("Cliquer sur un arc de cercle pour obtenir des informations complémentaires.");
 }

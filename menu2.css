@@ -6,12 +6,12 @@ div.generalSocle {
 	max-height: 900px;
 	max-width: 1650px;
 	
-	background: lightgray;
+	background: white;
 
 	float: left;
 
 	border-style: solid;
-	border-width: 5px;
+	border-width: 4px;
 	border-color: lightsteelblue;
 
 	padding: 5px;
@@ -20,7 +20,7 @@ div.generalSocle {
 
 div.socleDessein {
 
-	height: 95%;
+	height: 98%;
 	width: 70%;
 	
 	max-height: 900px;
@@ -40,7 +40,7 @@ div.socleDessein {
 
 div.legendG2socle {
 
-	height: 95%;
+	height: 98%;
 	width: 28%;
 
 	float: left;
@@ -49,7 +49,7 @@ div.legendG2socle {
 
 	border-style: solid;
 	border-width: 2px;
-	border-color: red;
+	border-color: white;
 
 	padding: 3px;
 }
@@ -94,7 +94,7 @@ div.dessein {
 
 	border-style: solid;
 	border-width: 2px;
-	border-color: red;
+	border-color: white;
 
 }
 
@@ -105,7 +105,7 @@ div.buttonsArea {
 
 	border-style: solid;
 	border-width: 2px;
-	border-color: red;
+	border-color: white;
 
 	padding: 3px;
 	margin-left: 3px;
@@ -125,7 +125,7 @@ div.legendGsocle {
 
 	border-style: solid;
 	border-width: 2px;
-	border-color: red;
+	border-color: white;
 
 	float: left;
 }
@@ -140,7 +140,7 @@ div.legendG {
 
 	border-style: solid;
 	border-width: 2px;
-	border-color: red;
+	border-color: white;
 
 	overflow: auto;
 }
@@ -172,7 +172,7 @@ div.legendG2 {
 
 	border-style: solid;
 	border-width: 2px;
-	border-color: red;
+	border-color: white;
 
 	overflow-y: auto;
 }
