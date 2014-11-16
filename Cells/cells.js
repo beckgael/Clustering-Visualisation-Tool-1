@@ -1,3 +1,4 @@
+// On trace les graphiques correspondant aux donnée
 function tracerCell(dimY1,rectTaillUser,dataUp2,boolLign) {
 
 

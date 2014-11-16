@@ -172,7 +172,7 @@ function plotForceLayoutInside(data2,numAtt,dataComp1,gravity0,friction0,chargeP
 	//console.log(clesAtt);
 	//console.log(dataComp1[clesAtt[numAtt]]);
 	
-	var color = d3.scale.linear().domain([d3.min(dataComp1[clesAtt[numAtt]]),d3.max(dataComp1[clesAtt[numAtt]])]).range(["pink","blue"]);
+	var color = d3.scale.linear().domain([d3.min(dataComp1[clesAtt[numAtt]]),d3.max(dataComp1[clesAtt[numAtt]])]).range(["red","blue"]);
 	var rayMaxNeur = rayMaxNeur0;
 	var cardScale = d3.scale.linear().domain([d3.min(dataComp1["card"]),d3.max(dataComp1["card"])]).range([3,rayMaxNeur]);
 	//console.log(data2.nodes)

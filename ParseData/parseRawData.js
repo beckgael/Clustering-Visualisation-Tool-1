@@ -264,7 +264,7 @@ function traitDataJson1(data) {
 
 
 
-
+//Traite les fichiers txt avec des " " au lieux des "," des fichiers csv
 function parseDataMathlab(data1) {
 
   var data = data1,

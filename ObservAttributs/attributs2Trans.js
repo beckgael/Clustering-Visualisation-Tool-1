@@ -61,7 +61,7 @@ function tracerProp3(dataUp2){
 				.style("top","30px")
 				.style("left","30px")
 				.style("width","450px")
-				.style("height","450px");
+				.style("height","470px");
 
 /*
 				.style("float","left");
@@ -115,7 +115,7 @@ function tracerProp3(dataUp2){
 
     svg1.append("text")
     		.attr("x","180")
-    		.attr("y","225")
+    		.attr("y","450")
     		.attr("font-size","20px")
     		.text(function(){ return clesF[ind2]; });
 
@@ -186,6 +186,30 @@ function tracerProp3(dataUp2){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//USELESS
 
 function foncInfobis(data,datas,index1) {
 

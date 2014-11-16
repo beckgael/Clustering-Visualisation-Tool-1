@@ -37,35 +37,47 @@ function prepareThePlace() {
 
 d3.select("div.generalSocle").remove();
 
-var generalSocle1 = d3.select("body").append("div").classed("generalSocle",true);
+	var generalSocle1 = d3.select("body")
+							.append("div")
+							.classed("generalSocle",true);
 
-var legendG2 = generalSocle1.append("div").classed("legendG2socle",true);
-var socleDessein = generalSocle1.append("div").classed("socleDessein",true);
-
-
-
-var dessein0 = socleDessein.append("div").classed("dessein0",true);
-var legend0 = socleDessein.append("div").classed("legend0",true);
-
-
-var socle1 = dessein0.append("div").classed("dessein",true);
+	var legendG2 = generalSocle1.append("div")
+								.classed("legendG2socle",true);
+	var socleDessein = generalSocle1.append("div")
+								.classed("socleDessein",true);
 
 
-var buttonsArea = legend0.append("div").classed("buttonsArea",true);
 
-var legendG = legend0.append("div").classed("legendGsocle",true);
+	var dessein0 = socleDessein.append("div")
+								.classed("dessein0",true);
+	var legend0 = socleDessein.append("div")
+								.classed("legend0",true);
 
-	legendG.append("div").classed("legendTitle1",true)
-							.text("Légende");
 
-							
-var boutons2Base = buttonsArea.append("div").classed("boutons2Base",true);
-							//.attr("id","b2");
+	var socle1 = dessein0.append("div")
+							.classed("dessein",true);
 
-var boutonsSup = buttonsArea.append("div").classed("boutonsSup",true);
-							//.attr("id","b2");
 
-choixUpldFichierCsvOuPas();
+	var buttonsArea = legend0.append("div")
+								.classed("buttonsArea",true);
+
+	var legendG = legend0.append("div")
+								.classed("legendGsocle",true);
+
+		legendG.append("div")
+				.classed("legendTitle1",true)
+				.text("Légende");
+
+								
+	var boutons2Base = buttonsArea.append("div")
+									.classed("boutons2Base",true);
+								//.attr("id","b2");
+
+	var boutonsSup = buttonsArea.append("div")
+								.classed("boutonsSup",true);
+								//.attr("id","b2");
+
+	choixUpldFichierCsvOuPas();
 
 
 };
