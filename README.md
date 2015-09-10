@@ -8,7 +8,7 @@ Hello, i'm glad to present you this tool which i make during my internship at LI
 At origin, it serve to visualize results of SOM algorithm but it can deserve others purposes.
 
 
-## **How to use it** ##
+## **Usage** ##
 ### Classic visualization ###
 You have two files to upload, the first is a CSV file with a header **without "card"** feature, the second file is a one column file with "**card**" attribute as header
 ### Adjacency matrix ###
