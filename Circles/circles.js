@@ -101,6 +101,7 @@ function circlesIn(toto,dimMap,dataUp2,boolLigne) {
 						            .scaleExtent([0.1, 30])
 						            .on("zoom", zoom1All)
 						       )
+						.on("dblclick.zoom", null)
 						.append("g")
 						.classed("gZoom",true);
 
